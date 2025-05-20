@@ -11,11 +11,14 @@ namespace TMS.Domain.ValueObjects
     {
         public PhoneVO(string phone)
         {
-            if (!IsValidFormat(Phone))
+            string sanitizedPhone = Sanitize(phone);
+
+            if (!IsValidFormat(sanitizedPhone))
             {
-                throw new InvalidExpressionException("The phone number is invalid.");
+                throw new InvalidExpressionException($"The phone number is invalid. Must be exactly 11 digits. Current length: {sanitizedPhone.Length}");
+
             }
-            Phone = phone;
+            Phone = sanitizedPhone;
         }
         
         public string Value =>  Phone;
