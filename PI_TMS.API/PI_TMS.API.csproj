@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.4.0" />
+    <PackageReference Include="Azure.Identity" Version="1.14.0" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
@@ -27,5 +30,11 @@
     <ProjectReference Include="..\TMS.Application\TMS.Application.csproj" />
     <ProjectReference Include="..\TMS.Infrastructure\TMS.Infrastructure.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.Development.json">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

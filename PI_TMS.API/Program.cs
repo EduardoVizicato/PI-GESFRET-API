@@ -1,4 +1,6 @@
 using System.Text;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TMS.Infrastructure;
@@ -7,6 +9,11 @@ using TMS.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    // Configure Azure Key Vault
+    string keyVaultUrl = "https://pi-tms-kv-2024.vault.azure.net/";
+    builder.Configuration.AddAzureKeyVault(
+        new Uri(keyVaultUrl),
+        new DefaultAzureCredential());
     builder.Services.AddControllers();
     builder.Services.AddInfrastructure();
     builder.Services.AddApplication();
@@ -43,7 +50,7 @@ var builder = WebApplication.CreateBuilder(args);
                 ValidIssuer = jwtSettings["Issuer"],
                 ValidAudience = jwtSettings["Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+                    Encoding.UTF8.GetBytes(builder.Configuration["pi-tms-secretkey"]))
             };
         });
 }
