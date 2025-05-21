@@ -4,11 +4,17 @@ public class VehicleRegistrationPlateVO
 {
     public VehicleRegistrationPlateVO(string registrationPlate)
     {
-        if (string.IsNullOrEmpty(registrationPlate))
-            throw new ArgumentException("Value cannot be null", nameof(registrationPlate));
+        if (!IsValidFormat(registrationPlate))
+            throw new ArgumentException("The format is invalid", nameof(registrationPlate));
         RegistrationPlate = registrationPlate;
     }
     
     public string Value => RegistrationPlate;
     public string RegistrationPlate { get; set; }
+
+    public static bool IsValidFormat(string sanitizedPhone)
+    {
+        return !string.IsNullOrWhiteSpace(sanitizedPhone) &&
+               sanitizedPhone.Length == 7;
+    }
 }
