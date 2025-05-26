@@ -5,9 +5,9 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Infrastructure.Data.Configuration.AdressConfiguration;
 
-public class AdressConfiguration : IEntityTypeConfiguration<Adress>
+public class AdressConfiguration : IEntityTypeConfiguration<Address>
 {
-    public void Configure(EntityTypeBuilder<Adress> builder)
+    public void Configure(EntityTypeBuilder<Address> builder)
     {
         builder.HasKey(x => x.Id);
         

@@ -23,4 +23,8 @@
         <Using Include="NUnit.Framework" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TMS.Domain\TMS.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -23,7 +23,7 @@ namespace TMS.Domain.Entites
             DescriptionVO description,
             Guid loadId,
             Load load,
-            Adress adress)
+            Address adress)
         {
             TravelName = travelName;
             StartDate = startDate;
@@ -39,7 +39,7 @@ namespace TMS.Domain.Entites
         public DateTime EndDate { get; private set; }
         public TravelStatus TravelStatus { get; private set; } = TravelStatus.Todo;
         public DateTime DateCreate { get; } = DateTime.Now;
-        public Adress Adress { get; private set; }
+        public Address Adress { get; private set; }
         public float Weight { get; private set; }
         public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
@@ -54,7 +54,7 @@ namespace TMS.Domain.Entites
             DescriptionVO description,
             Guid loadId,
             Load load,
-            Adress adress)
+            Address adress)
         {
             TravelName = travelName;
             StartDate = startDate;

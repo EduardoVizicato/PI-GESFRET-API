@@ -3,13 +3,13 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entities;
 
-public class Adress : BaseEntity
+public class Address : BaseEntity
 {
-    public Adress()
+    public Address()
     {
         
     }
-    public Adress(StreetVO street, CityVO city, StateVO state, PostalCodeVO postalCode, int adressNumber)
+    public Address(StreetVO street, CityVO city, StateVO state, PostalCodeVO postalCode, int adressNumber)
     {
         Street = street;
         City = city;
