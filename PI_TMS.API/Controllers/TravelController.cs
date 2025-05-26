@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TMS.Application.Services.Interfaces;
+using TMS.Domain.Entites.Requests.Travel;
 
 namespace PI_TMS.API.Controllers
 {
@@ -15,7 +16,7 @@ namespace PI_TMS.API.Controllers
         }
 
 
-        [HttpGet("getAll")]
+        [HttpGet("getAllTravels")]
         public async Task<IActionResult> GetAll()
         {
             var data = await _travelService.GetAllAsync();
@@ -24,6 +25,52 @@ namespace PI_TMS.API.Controllers
                 return BadRequest();
             }
 
+            return Ok(data);
+        }
+
+        [HttpPost("addTravel")]
+        public async Task<IActionResult> AddTravel(TravelRequest travel)
+        {
+            var data = await _travelService.AddAsync(travel);
+            if (data == null)
+                return BadRequest();
+            
+            return Ok(data);
+        }
+        
+        [HttpGet("getTravelById")]
+        public async Task<IActionResult> GetTravelById(Guid id)
+        {
+            var data = await _travelService.GetByIdAsync(id);
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            
+            return Ok(data);
+        }
+        
+        [HttpPost("changeTravelStatus")]
+        public async Task<IActionResult> ChangeTravelStatus(Guid id)
+        {
+            var data = await _travelService.ChangeStatusAsync(id);
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            
+            return Ok(data);
+        }
+        
+        [HttpDelete("cancelTravel")]
+        public async Task<IActionResult> CancelTravel(Guid id)
+        {
+            var data = await _travelService.CancelTravel(id);
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            
             return Ok(data);
         }
     }
