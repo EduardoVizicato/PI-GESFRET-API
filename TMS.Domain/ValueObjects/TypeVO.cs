@@ -14,6 +14,6 @@ public class TypeVO
         
         Type = type;
     }
-    public string Value => Value;
+    public string Value => Type;
     public string Type{ get; }
 }
