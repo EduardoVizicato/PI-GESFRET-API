@@ -48,8 +48,8 @@ namespace TMS.Infrastructure.Data.Configuration.UserConfiguration
                 .HasColumnName("TaxID")
                 .HasConversion(taxId => taxId.Value, value => new TaxIdVO(value));
 
-            builder.Property(x => x.UserRole)
-                .HasColumnName("UserRole");
+            // builder.Property(x => x.UserRole)
+            //     .HasColumnName("UserRole");
 
         }
     }
