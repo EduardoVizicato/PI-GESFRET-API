@@ -23,7 +23,7 @@ namespace TMS.Domain.Entites
             DescriptionVO description,
             Guid loadId,
             Load load,
-            Address adress)
+            ICollection<Address> address)
         {
             TravelName = travelName;
             StartDate = startDate;
@@ -32,14 +32,14 @@ namespace TMS.Domain.Entites
             Price = price;
             Description = description;
             Load = load;
-            Adress = adress;
+            Address = address;
         }
         public string TravelName { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public TravelStatus TravelStatus { get; private set; } = TravelStatus.Todo;
         public DateTime DateCreate { get; } = DateTime.Now;
-        public Address Adress { get; private set; }
+        public ICollection<Address> Address { get; private set; }
         public float Weight { get; private set; }
         public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
@@ -54,7 +54,7 @@ namespace TMS.Domain.Entites
             DescriptionVO description,
             Guid loadId,
             Load load,
-            Address adress)
+            ICollection<Address> address)
         {
             TravelName = travelName;
             StartDate = startDate;
@@ -63,7 +63,7 @@ namespace TMS.Domain.Entites
             Price = price;
             Description = description;
             Load = load;
-            Adress = adress;
+            Address = address;
         }
 
         private static Dictionary<TravelStatus, TravelStatus> _nextStatus = new()

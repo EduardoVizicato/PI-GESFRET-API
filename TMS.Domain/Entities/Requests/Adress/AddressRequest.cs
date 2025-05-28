@@ -1,6 +1,6 @@
 ﻿namespace TMS.Domain.Entities.Requests.Adress;
 
-public class AdressRequest
+public class AddressRequest
 {
     public string Street { get; private set; }
     public string City { get; private set; }
