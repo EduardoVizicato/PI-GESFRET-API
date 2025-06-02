@@ -12,21 +12,21 @@ namespace TMS.Domain.Entites
 {
     public class Vehicle : BaseEntity
     {
-        public Vehicle(string name, VehicleRegistrationPlateVO vehicleRegistrationPlate, VehicleType vehicleType)
+        public Vehicle(string name, VehicleRegistrationPlateVO vehicleRegistrationPlate)
         {
             Name = name;
             VehicleRegistrationPlate = vehicleRegistrationPlate;
-            VehicleType = vehicleType;
+            // VehicleType = vehicleType;
         }
         public string Name { get; private set; }
         public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; private set; }
-        public VehicleType VehicleType { get; private set; }
+        
+        // VOU ARRUMAR CHEGANDO EM CASA public VehicleType VehicleType { get; private set; }
 
-        public void UpdateVehicle(string name, VehicleRegistrationPlateVO vehicleRegistrationPlate, VehicleType vehicleType)
+        public void UpdateVehicle(string name, VehicleRegistrationPlateVO vehicleRegistrationPlate)
         {
             Name = name;
             VehicleRegistrationPlate = vehicleRegistrationPlate;
-            VehicleType = vehicleType;
         }
     }
 }

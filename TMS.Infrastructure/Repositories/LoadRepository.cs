@@ -26,7 +26,7 @@ public class LoadRepository: ILoadRepository
 
     public async Task<LoadRequest> AddAsync(LoadRequest load)
     {
-        var addLoad = new Load(load.Description, load.Quantity, load.Type);
+        var addLoad = new Load(load.Description, load.Quantity, load.Type, load.User);
         _context.Loads.Add(addLoad);
         await _context.SaveChangesAsync();
         return load;
@@ -35,7 +35,7 @@ public class LoadRepository: ILoadRepository
     public async Task<bool?> UpdatesAsync(Guid id, LoadResponse load)
     {
         var updateLoad = await _context.Loads.FindAsync(id);
-        updateLoad.Updateload(load.Description, load.Quantity, load.Type);
+        updateLoad.Updateload(load.Description, load.Quantity, load.Type, load.User);
         _context.Loads.Update(updateLoad);
         return await _context.SaveChangesAsync() > 0;
     }
