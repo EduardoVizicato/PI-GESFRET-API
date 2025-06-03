@@ -10,10 +10,10 @@ using TMS.Service.Services;
 var builder = WebApplication.CreateBuilder(args);
 {
     // Configure Azure Key Vault
-    string keyVaultUrl = "https://pi-tms-kv-2024.vault.azure.net/";
-    builder.Configuration.AddAzureKeyVault(
-        new Uri(keyVaultUrl),
-        new DefaultAzureCredential());
+    //string keyVaultUrl = "https://pi-tms-kv-2024.vault.azure.net/";
+    //builder.Configuration.AddAzureKeyVault(
+    //    new Uri(keyVaultUrl),
+    //    new DefaultAzureCredential());
     builder.Services.AddControllers();
     builder.Services.AddInfrastructure();
     builder.Services.AddApplication();
@@ -50,7 +50,7 @@ var builder = WebApplication.CreateBuilder(args);
                 ValidIssuer = jwtSettings["Issuer"],
                 ValidAudience = jwtSettings["Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(builder.Configuration["pi-tms-secretkey"]))
+                    Encoding.UTF8.GetBytes(jwtSettings["Key"]))
             };
         });
 }

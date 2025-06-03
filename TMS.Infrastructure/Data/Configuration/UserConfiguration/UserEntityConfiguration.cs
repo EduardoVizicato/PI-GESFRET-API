@@ -10,9 +10,9 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Infrastructure.Data.Configuration.UserConfiguration
 {
-    internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
+    internal class UserEntityConfiguration : IEntityTypeConfiguration<UserModel>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserModel> builder)
         {
             builder.Property(x => x.Id)
                 .HasColumnType("uniqueidentifier")

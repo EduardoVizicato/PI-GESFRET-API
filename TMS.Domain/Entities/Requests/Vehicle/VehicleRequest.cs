@@ -12,6 +12,5 @@ namespace TMS.Domain.Entites.Requests.Vehicle
     {
         public string Name { get; set; }
         public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; set; }
-        public VehicleType VehicleType { get; set; }
     }
 }

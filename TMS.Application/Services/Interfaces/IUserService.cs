@@ -15,11 +15,11 @@ namespace TMS.Application.Services.Interfaces
         Task<bool?> RegisterUser(RegisterUserRequest request);
         Task<bool?> DesactiveUser(Guid id);
         Task<bool?> UpdateUser(Guid id, RegisterUserResponse request);
-        Task<List<User>> ListAllUsers();
-        Task<User> GetUserById(Guid id);
-        Task<User> GetUserByEmail(EmailVO email);
-        Task<List<User>> ListAllActivedUsers();
-        Task<List<User>> ListAllDesactivedUsers();
-        Task<User> ValidateUser(EmailVO email, PasswordVO password);
+        Task<List<UserModel>> ListAllUsers();
+        Task<UserModel> GetUserById(Guid id);
+        Task<UserModel> GetUserByEmail(EmailVO email);
+        Task<List<UserModel>> ListAllActivedUsers();
+        Task<List<UserModel>> ListAllDesactivedUsers();
+        Task<UserModel> ValidateUser(EmailVO email, PasswordVO password);
     }
 }

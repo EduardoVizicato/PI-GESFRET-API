@@ -33,23 +33,23 @@ namespace TMS.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<List<User>> GetAllActivedUsers()
+        public async Task<List<UserModel>> GetAllActivedUsers()
         {
             return await _context.Users.Where(x => x.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<UserModel>> GetAllAsync()
         {
             _logger.LogInformation("Carregando todos os usuários");
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<List<User>> GetAllDesactivedUsers()
+        public async Task<List<UserModel>> GetAllDesactivedUsers()
         {
             return await _context.Users.Where(x => x.IsActive == false).ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(Guid id)
+        public async Task<UserModel> GetByIdAsync(Guid id)
         {
             var userById = await _context.Users.FindAsync(id);
             if (id == null)
@@ -61,7 +61,7 @@ namespace TMS.Infrastructure.Repositories
             return userById;
         }
 
-        public async Task<User> GetUserByEmail(EmailVO email)
+        public async Task<UserModel> GetUserByEmail(EmailVO email)
         {
             var userByEmail = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
 
@@ -69,7 +69,7 @@ namespace TMS.Infrastructure.Repositories
             return userByEmail;
         }
 
-        public async Task<User> AddAsync(User user)
+        public async Task<UserModel> AddAsync(UserModel user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

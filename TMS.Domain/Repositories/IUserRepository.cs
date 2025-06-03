@@ -12,13 +12,13 @@ namespace TMS.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllAsync();
-        Task<User> GetByIdAsync(Guid id);
-        Task<User> GetUserByEmail(EmailVO email);
-        Task<User> AddAsync(User user);
+        Task<List<UserModel>> GetAllAsync();
+        Task<UserModel> GetByIdAsync(Guid id);
+        Task<UserModel> GetUserByEmail(EmailVO email);
+        Task<UserModel> AddAsync(UserModel user);
         Task<bool?> UpdatesUserAsync(Guid id,RegisterUserResponse user);
         Task<bool?> DesactiveUserAsync(Guid id);
-        Task<List<User>> GetAllActivedUsers();
-        Task<List<User>> GetAllDesactivedUsers();
+        Task<List<UserModel>> GetAllActivedUsers();
+        Task<List<UserModel>> GetAllDesactivedUsers();
     }
 }

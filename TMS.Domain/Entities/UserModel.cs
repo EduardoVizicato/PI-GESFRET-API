@@ -10,9 +10,9 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entities
 {
-    public class User : BaseEntity
+    public class UserModel : BaseEntity
     {
-        public User(string firstName, string lastName, EmailVO email, PasswordVO password, TaxIdVO taxId, PhoneVO phoneNumber)
+        public UserModel(string firstName, string lastName, EmailVO email, PasswordVO password, TaxIdVO taxId, PhoneVO phoneNumber)
         {
             FirstName = firstName;
             LastName = lastName;

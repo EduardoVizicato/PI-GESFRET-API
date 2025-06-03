@@ -39,7 +39,7 @@ namespace TMS.Application.Services.Implementation
             return updateUser;
         }
 
-        public Task<User> GetUserByEmail(EmailVO email)
+        public Task<UserModel> GetUserByEmail(EmailVO email)
         {
             var getUserByEmail = _userRepository.GetUserByEmail(email);
             if (getUserByEmail == null)
@@ -50,7 +50,7 @@ namespace TMS.Application.Services.Implementation
             return getUserByEmail;
         }
 
-        public Task<User> GetUserById(Guid id)
+        public Task<UserModel> GetUserById(Guid id)
         {
             var getUserById = _userRepository.GetByIdAsync(id);
             if (getUserById == null)
@@ -60,19 +60,19 @@ namespace TMS.Application.Services.Implementation
             return getUserById;
         }
 
-        public Task<List<User>> ListAllActivedUsers()
+        public Task<List<UserModel>> ListAllActivedUsers()
         {
             var getAllActivedUsers = _userRepository.GetAllActivedUsers();
             return getAllActivedUsers;
         }
 
-        public Task<List<User>> ListAllDesactivedUsers()
+        public Task<List<UserModel>> ListAllDesactivedUsers()
         {
             var listAllDesactivedUsers = _userRepository.GetAllDesactivedUsers();
             return listAllDesactivedUsers;
         }
 
-        public async Task<User> ValidateUser(EmailVO email, PasswordVO password)
+        public async Task<UserModel> ValidateUser(EmailVO email, PasswordVO password)
         {
             var user = await _userRepository.GetUserByEmail(email);
             if (user == null) return null;
@@ -81,7 +81,7 @@ namespace TMS.Application.Services.Implementation
             return isValid ? user : null;
         }
 
-        public Task<List<User>> ListAllUsers()
+        public Task<List<UserModel>> ListAllUsers()
         {
             var listAllUsers = _userRepository.GetAllAsync();
             return listAllUsers;
@@ -94,7 +94,7 @@ namespace TMS.Application.Services.Implementation
             var hashed = _passwordHasherService.HashPassword(request.Password);
             var hashedPassword = new PasswordVO(hashed);
 
-            var user = new User(
+            var user = new UserModel(
                 request.FirstName,
                 request.LastName,
                 request.Email,
