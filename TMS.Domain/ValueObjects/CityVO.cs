@@ -4,7 +4,7 @@ public class CityVO
 {
     public CityVO(string city)
     {
-        if(!IsValidFormat(City))
+        if(!IsValidFormat(city))
             throw new ArgumentException("Invalid City name");
     }
 

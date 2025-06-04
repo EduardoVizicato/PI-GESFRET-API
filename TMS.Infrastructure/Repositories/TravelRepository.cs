@@ -36,7 +36,7 @@ public class TravelRepository : ITravelRepository
             travel.Description,
             travel.LoadId,
             travel.Load,
-            (ICollection<Domain.Entities.Address>)travel.Address
+            travel.Address
             );
         _context.Travels.Add(addTravel);
         await _context.SaveChangesAsync();
