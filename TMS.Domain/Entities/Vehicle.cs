@@ -16,12 +16,9 @@ namespace TMS.Domain.Entites
         {
             Name = name;
             VehicleRegistrationPlate = vehicleRegistrationPlate;
-            // VehicleType = vehicleType;
         }
         public string Name { get; private set; }
         public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; private set; }
-        
-        // VOU ARRUMAR CHEGANDO EM CASA public VehicleType VehicleType { get; private set; }
 
         public void UpdateVehicle(string name, VehicleRegistrationPlateVO vehicleRegistrationPlate)
         {

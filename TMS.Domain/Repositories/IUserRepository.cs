@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
@@ -14,11 +15,12 @@ namespace TMS.Domain.Repositories
     {
         Task<List<UserModel>> GetAllAsync();
         Task<UserModel> GetByIdAsync(Guid id);
-        Task<UserModel> GetUserByEmail(EmailVO email);
-        Task<UserModel> AddAsync(UserModel user);
-        Task<bool?> UpdatesUserAsync(Guid id,RegisterUserResponse user);
+        Task<UserModel> GetByEmailAsync(string email);
+        Task<IdentityResult> AddAsync(UserModel user, string password);
+        Task<IdentityResult> UpdateAsync(UserModel user);
         Task<bool?> DesactiveUserAsync(Guid id);
         Task<List<UserModel>> GetAllActivedUsers();
         Task<List<UserModel>> GetAllDesactivedUsers();
+        Task<bool> CheckPasswordAsync(UserModel user, string password);
     }
 }

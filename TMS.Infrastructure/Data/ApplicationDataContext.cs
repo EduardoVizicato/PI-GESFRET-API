@@ -11,17 +11,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.Domain.Entites;
 using TMS.Domain.Entities;
 using System.Text.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TMS.Infrastructure.Data
 {
-    public class ApplicationDataContext : DbContext
+    public class ApplicationDataContext : IdentityDbContext<UserModel, IdentityRole<Guid>, Guid>
     {
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
         {
             
         }
         
-        public DbSet<UserModel> Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Load> Loads { get; set; }
         public DbSet<Travel> Travels { get; set; }
@@ -29,9 +30,8 @@ namespace TMS.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);
-
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);
         }
     }
 }

@@ -25,10 +25,6 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
                 .HasColumnName("VehicleRegistrationPlate")
                 .IsRequired()
                 .HasConversion(registrationPlate => registrationPlate.Value, value => new VehicleRegistrationPlateVO(value));
-
-            // builder.Property(x => x.VehicleType)
-            //     .HasColumnName("VehicleType")
-            //     .IsRequired();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,24 @@ namespace TMS.Domain.Entites.Requests.User
 {
     public record RegisterUserRequest
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public EmailVO Email { get; set; }
-        public PasswordVO Password { get; set; }
-        public PhoneVO PhoneNumber { get; set; }
-        public TaxIdVO TaxId { get; set; }
+        [Required]
+        public string FirstName { get; init; }
+
+        [Required]
+        public string LastName { get; init; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; init; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; init; }
+
+        [Required]
+        public string PhoneNumber { get; init; }
+
+        [Required]
+        public string TaxId { get; init; }
     }
 }

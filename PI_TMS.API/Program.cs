@@ -1,10 +1,12 @@
 using System.Text;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TMS.Infrastructure;
 using TMS.Infrastructure.Data;
+using TMS.Infrastructure.OptionsSetup;
 using TMS.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +37,12 @@ var builder = WebApplication.CreateBuilder(args);
                   .AllowAnyMethod();
         });
     });
+    
+    builder.Services.ConfigureOptions<IdentityOptionsSetup>();
+    
+    builder.Services.AddIdentity<UserModel, IdentityRole<Guid>>()
+        .AddEntityFrameworkStores<ApplicationDataContext>()
+        .AddDefaultTokenProviders();
 
     builder.Services.AddAuthentication("Bearer")
         .AddJwtBearer("Bearer", options =>
@@ -67,6 +75,8 @@ var app = builder.Build();
     app.UseCors("AllowLocalhost4200");
          
     app.UseHttpsRedirection();
+    
+    app.UseAuthentication();
 
     app.UseAuthorization();
 

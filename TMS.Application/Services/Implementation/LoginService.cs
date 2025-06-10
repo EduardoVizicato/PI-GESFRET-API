@@ -7,14 +7,15 @@ namespace TMS.Application.Services.Implementation;
 public class LoginService : ILoginService
 {
     private readonly IUserService _userService;
-    private readonly IJwtTokenGenerator _jwtTokenGenerator ;
+    private readonly IJwtTokenGenerator _jwtTokenGenerator;
+
     public LoginService(IUserService userService, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userService = userService;
         _jwtTokenGenerator = jwtTokenGenerator;
     }
     
-    public async Task<string> LoginAsync(EmailVO email, PasswordVO password)
+    public async Task<string> LoginAsync(EmailVO email, string password)
     {
         var user = await _userService.ValidateUser(email, password);
         
@@ -22,8 +23,7 @@ public class LoginService : ILoginService
         {
             return null;
         }
-
+        
         return _jwtTokenGenerator.GenerateToken(user);
-
     }
 }

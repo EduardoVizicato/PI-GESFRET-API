@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
@@ -18,10 +19,13 @@ namespace TMS.Infrastructure.Repositories
     {
         private readonly ApplicationDataContext _context;
         private readonly ILogger<UserRepository> _logger;
-        public UserRepository(ApplicationDataContext context, ILogger<UserRepository> logger)
+        private readonly UserManager<UserModel> _userManager;
+        
+        public UserRepository(ApplicationDataContext context, ILogger<UserRepository> logger, UserManager<UserModel> userManager)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public async Task<bool?> DesactiveUserAsync(Guid id)
@@ -49,43 +53,33 @@ namespace TMS.Infrastructure.Repositories
             return await _context.Users.Where(x => x.IsActive == false).ToListAsync();
         }
 
+        public async Task<bool> CheckPasswordAsync(UserModel user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
+
         public async Task<UserModel> GetByIdAsync(Guid id)
         {
-            var userById = await _context.Users.FindAsync(id);
-            if (id == null)
-            {
-                _logger.LogError($"usuário de id: {id} não encontrado");
-                return null;
-            }
-            _logger.LogInformation($"Usário de id: {id} encontrado");
-            return userById;
+            _logger.LogInformation($"Fetching user by id {id}");
+            return await _userManager.FindByIdAsync(id.ToString());
         }
 
-        public async Task<UserModel> GetUserByEmail(EmailVO email)
+        public async Task<UserModel> GetByEmailAsync(string email)
         {
-            var userByEmail = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-
-            _logger.LogInformation($"Usuário encontrado");
-            return userByEmail;
+            _logger.LogInformation($"Fetching user by email {email}");
+            return await _userManager.FindByEmailAsync(email);
         }
 
-        public async Task<UserModel> AddAsync(UserModel user)
+        public async Task<IdentityResult> AddAsync(UserModel user, string password)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
+            _logger.LogInformation($"Creating user{user.Email}");
+            return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<bool?>  UpdatesUserAsync(Guid id, RegisterUserResponse user)
+        public async Task<IdentityResult> UpdateAsync(UserModel user)
         {
-            var userToUpdate = await _context.Users.FindAsync(id);
-            
-            userToUpdate.UpdateUser(user.FirstName, user.LastName, user.Email, user.TaxId, user.PhoneNumber);
-            _context.Users.Update(userToUpdate);
-            await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"Usuário de id: {id} atualizado com sucesso");
-            return true;
+            _logger.LogInformation($"Updating user{user.Id}");
+            return await _userManager.UpdateAsync(user);
         }
     }
 }
