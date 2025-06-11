@@ -9,6 +9,6 @@ namespace TMS.Service.Common.Application.Authentication
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(UserModel user);
+        Task<string> GenerateToken(UserModel user);
     }
 }

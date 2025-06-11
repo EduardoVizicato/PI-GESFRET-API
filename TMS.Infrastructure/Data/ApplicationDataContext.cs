@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TMS.Infrastructure.Data
 {
-    public class ApplicationDataContext : IdentityDbContext<UserModel, IdentityRole<Guid>, Guid>
+    public class ApplicationDataContext : IdentityDbContext<UserModel>
     {
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
         {
