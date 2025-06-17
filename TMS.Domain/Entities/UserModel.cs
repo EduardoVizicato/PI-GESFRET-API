@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using TMS.Domain.Entities.Interfaces;
 using TMS.Domain.ValueObjects;
 
-public class UserModel : IdentityUser
+public class UserModel : IdentityUser<Guid>
 {
-    private UserModel() { }
     
     public UserModel(string firstName, string lastName, TaxIdVO taxId)
     {

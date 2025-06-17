@@ -9,7 +9,7 @@ namespace TMS.Domain.Entites.Requests.User
 {
     public record LoginUserRequest
     {
-        public EmailVO Email { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }

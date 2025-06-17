@@ -18,9 +18,9 @@ namespace TMS.Application.Services.Interfaces
         Task<IdentityResult> UpdateUser(Guid id, RegisterUserResponse request);
         Task<List<UserModel>> ListAllUsers();
         Task<UserModel> GetUserById(Guid id);
-        Task<UserModel> GetUserByEmail(EmailVO email);
+        Task<UserModel> GetUserByEmail(string email);
         Task<List<UserModel>> ListAllActivedUsers();
         Task<List<UserModel>> ListAllDesactivedUsers();
-        Task<UserModel> ValidateUser(EmailVO email, string password);
+        Task<UserModel> ValidateUser(string email, string password);
     }
 }

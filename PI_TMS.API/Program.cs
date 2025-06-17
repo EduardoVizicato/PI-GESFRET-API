@@ -38,8 +38,8 @@ var builder = WebApplication.CreateBuilder(args);
         });
     });
     
-    builder.Services.ConfigureOptions<IdentityOptionsSetup>();
-    
+    builder.Services.ConfigureOptions<IdentityOptionsSetup>(); 
+
     builder.Services.AddIdentity<UserModel, IdentityRole<Guid>>()
         .AddEntityFrameworkStores<ApplicationDataContext>()
         .AddDefaultTokenProviders();

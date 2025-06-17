@@ -76,7 +76,7 @@ namespace PI_TMS.API.Controllers
         }
         
         [HttpGet("getbyEmail")]
-        public async Task<IActionResult> GetByEmail(EmailVO email)
+        public async Task<IActionResult> GetByEmail(string email)
         {
             var data = await _userService.GetUserByEmail(email);
             return Ok(data);

@@ -26,7 +26,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     {
         var userClaims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier,  user.Id),
+            new Claim(ClaimTypes.NameIdentifier,  user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.GivenName, user.FirstName),
             new Claim(ClaimTypes.Surname, user.LastName),
@@ -39,7 +39,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(userClaims),
-            Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpireMinutes"])),
+            Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpiresInMinutes"])),
             SigningCredentials = credentials,
             Issuer = _configuration["Jwt:Issuer"],
         };

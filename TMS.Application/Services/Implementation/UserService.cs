@@ -42,25 +42,12 @@ namespace TMS.Application.Services.Implementation
                 return IdentityResult.Failed(new IdentityError { Description = "User not found." });
             }
             
-            userToUpdate.UpdateUser(
-                request.FirstName, 
-                request.LastName, 
-                request.Email,      
-                request.TaxId,      
-                request.PhoneNumber 
-            );
-            
             return await _userRepository.UpdateAsync(userToUpdate);
         }
 
-        public async Task<UserModel> GetUserByEmail(EmailVO email)
+        public async Task<UserModel> GetUserByEmail(string email)
         {
-            var user = await _userRepository.GetByEmailAsync(email.Value); 
-            if (user == null)
-            {
-                _logger.LogWarning($"User with email {email} not found");
-            }
-            return user;
+            return await  _userRepository.GetByEmailAsync(email);
         }
 
         public async Task<UserModel> GetUserById(Guid id)
@@ -85,9 +72,10 @@ namespace TMS.Application.Services.Implementation
             return listAllDesactivedUsers;
         }
         
-        public async Task<UserModel> ValidateUser(EmailVO email, string password)
+
+        public async Task<UserModel> ValidateUser(string email, string password)
         {
-            var user = await _userRepository.GetByEmailAsync(email.Value);
+            var user = await _userRepository.GetByEmailAsync(email);
             if (user == null)
             {
                 _logger.LogWarning($"User with email {email} not found.");
@@ -115,36 +103,41 @@ namespace TMS.Application.Services.Implementation
 
         public async Task<(IdentityResult, RegisterUserResponse)> RegisterUser(RegisterUserRequest request)
         {
-            var emailVO = new EmailVO(request.Email);
-            var phoneVO = new PhoneVO(request.PhoneNumber);
-            var taxIdVO = new TaxIdVO(request.TaxId);
+            var existingUser = await _userRepository.GetByEmailAsync(request.Email);
+            if (existingUser != null)
+            {
+                var emailError = new IdentityError { Code = "DuplicateEmail", Description = "This email is already registered." };
+                return (IdentityResult.Failed(emailError), null);
+            }
             
             var newUser = new UserModel(
                 request.FirstName,
                 request.LastName,
-                emailVO,
-                taxIdVO,
-                phoneVO
+                request.TaxId
             );
             
-            var result = await _userRepository.AddAsync(newUser, request.Password);
+            newUser.Email = request.Email;
+            newUser.UserName = request.Email; 
+            newUser.PhoneNumber = request.PhoneNumber;
             
-            if (result.Succeeded)
+            var identityResult = await _userRepository.AddAsync(newUser, request.Password);
+            
+            if (!identityResult.Succeeded)
+                return (identityResult, null);
+            
+            
+            var response = new RegisterUserResponse
             {
-                _logger.LogInformation($"User {newUser.Email} created");
-                var response = new RegisterUserResponse
-                {
-                    FirstName = newUser.FirstName,
-                    LastName = newUser.LastName,
-                    Email = newUser.EmailVO,
-                    PhoneNumber = newUser.PhoneVO,
-                    TaxId = newUser.TaxId
-                };
-                return (result, response);
-            }
-            
-            _logger.LogError($"Failed to create user {newUser.Email}.");
-            return (result, null);
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName,
+                Email = newUser.Email,
+                TaxId = newUser.TaxId,
+                PhoneNumber = newUser.PhoneNumber,
+                CreatedAt = newUser.CreatedAt
+            };
+
+            // 8. Return the success result and the mapped response.
+            return (identityResult, response);
         }
     }
 }

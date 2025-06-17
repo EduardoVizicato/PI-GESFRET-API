@@ -15,15 +15,13 @@ public class LoginService : ILoginService
         _jwtTokenGenerator = jwtTokenGenerator;
     }
     
-    public async Task<string> LoginAsync(EmailVO email, string password)
+    public async Task<string> LoginAsync(string email, string password)
     {
         var user = await _userService.ValidateUser(email, password);
         
         if (user == null)
-        {
             return null;
-        }
         
-        return _jwtTokenGenerator.GenerateToken(user);
+        return await _jwtTokenGenerator.GenerateToken(user);
     }
 }

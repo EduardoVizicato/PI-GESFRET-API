@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites.Responses.User
 {
-    public class RegisterUserResponse
+    public record RegisterUserResponse
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public EmailVO Email { get; set; }
-        public TaxIdVO TaxId{ get;  set; }
-        public PhoneVO PhoneNumber { get;  set; }
+        
+        public string FirstName { get; init; }
+        
+        public string LastName { get; init; }
+        
+        public string Email { get; init; }
+        
+        public TaxIdVO TaxId { get; init; }
+        
+        public string PhoneNumber { get; init; }
+
+        public DateTime CreatedAt { get; init; }
     }
 }

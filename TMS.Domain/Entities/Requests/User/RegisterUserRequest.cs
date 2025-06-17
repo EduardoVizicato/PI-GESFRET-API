@@ -28,6 +28,6 @@ namespace TMS.Domain.Entites.Requests.User
         public string PhoneNumber { get; init; }
 
         [Required]
-        public string TaxId { get; init; }
+        public TaxIdVO TaxId { get; init; }
     }
 }
