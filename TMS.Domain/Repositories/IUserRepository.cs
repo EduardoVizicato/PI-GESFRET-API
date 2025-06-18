@@ -21,6 +21,5 @@ namespace TMS.Domain.Repositories
         Task<bool?> DesactiveUserAsync(Guid id);
         Task<List<UserModel>> GetAllActivedUsers();
         Task<List<UserModel>> GetAllDesactivedUsers();
-        Task<bool> CheckPasswordAsync(UserModel user, string password);
     }
 }

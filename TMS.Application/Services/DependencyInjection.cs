@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TMS.Application.Common.Implementation.Authentication;
-using TMS.Application.Common.Interface.Authentication;
 using TMS.Application.Services.Implementation;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Repositories;
@@ -24,7 +23,6 @@ namespace TMS.Service.Services
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<ILoadService, LoadService>();
             services.AddScoped<ITravelService, TravelService>();
-            services.AddScoped<IPasswordHasherService, PasswordHasherService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ILoginService, LoginService>();
             return services;

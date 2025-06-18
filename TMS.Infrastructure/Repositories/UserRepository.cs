@@ -53,11 +53,6 @@ namespace TMS.Infrastructure.Repositories
             return await _context.Users.Where(x => x.IsActive == false).ToListAsync();
         }
 
-        public async Task<bool> CheckPasswordAsync(UserModel user, string password)
-        {
-            return await _userManager.CheckPasswordAsync(user, password);
-        }
-
         public async Task<UserModel> GetByIdAsync(Guid id)
         {
             _logger.LogInformation($"Fetching user by id {id}");

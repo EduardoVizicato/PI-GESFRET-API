@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Extensions;
 using Microsoft.AspNetCore.Identity;
-using TMS.Application.Common.Interface.Authentication;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
 using TMS.Domain.Repositories;
 using TMS.Domain.ValueObjects;
+using Microsoft.CodeAnalysis;
 
 namespace TMS.Application.Services.Implementation
 {
@@ -81,7 +81,7 @@ namespace TMS.Application.Services.Implementation
                 _logger.LogWarning($"User with email {email} not found.");
                 return null; 
             }
-            var isPasswordCorrect = await _userRepository.CheckPasswordAsync(user, password);
+            var isPasswordCorrect = await _userManager.CheckPasswordAsync(user, password);
 
             if (isPasswordCorrect)
             {
@@ -109,7 +109,9 @@ namespace TMS.Application.Services.Implementation
                 var emailError = new IdentityError { Code = "DuplicateEmail", Description = "This email is already registered." };
                 return (IdentityResult.Failed(emailError), null);
             }
+
             
+
             var newUser = new UserModel(
                 request.FirstName,
                 request.LastName,
@@ -119,7 +121,7 @@ namespace TMS.Application.Services.Implementation
             newUser.Email = request.Email;
             newUser.UserName = request.Email; 
             newUser.PhoneNumber = request.PhoneNumber;
-            
+
             var identityResult = await _userRepository.AddAsync(newUser, request.Password);
 
 
