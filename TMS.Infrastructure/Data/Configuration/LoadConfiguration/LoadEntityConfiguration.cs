@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMS.Domain.Entites;
 using TMS.Domain.Entities;
 using TMS.Domain.ValueObjects;
 
@@ -30,8 +24,13 @@ namespace TMS.Infrastructure.Data.Configuration.LoadConfiguration
                 .IsRequired()
                 .HasColumnName("Type")
                 .HasConversion(type => type.Value, value => new TypeVO(value));
+
+
+            builder.HasOne(l => l.User)             
+                   .WithMany()                      
+                   .HasForeignKey(l => l.UserId)    
+                   .IsRequired()                    
+                   .OnDelete(DeleteBehavior.Restrict); 
         }
     }
-    
 }
-

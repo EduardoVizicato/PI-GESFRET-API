@@ -72,8 +72,22 @@ namespace TMS.Infrastructure.Repositories
 
         public async Task<IdentityResult> AddAsync(UserModel user, string password)
         {
-            _logger.LogInformation($"Creating user{user.Email}");
-            return await _userManager.CreateAsync(user, password);
+            _logger.LogInformation($"Attempting to create user: {user.Email}");
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    _logger.LogError($"Error creating user {user.Email}: Code={error.Code}, Description={error.Description}");
+                }
+            }
+            else
+            {
+                _logger.LogInformation($"Successfully created user: {user.Email}");
+            }
+
+            return result;
         }
 
         public async Task<IdentityResult> UpdateAsync(UserModel user)

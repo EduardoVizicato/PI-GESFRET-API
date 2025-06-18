@@ -41,7 +41,6 @@ public class LoadService : ILoadService
     public async Task<LoadRequest> AddAsync(LoadRequest load)
     {
         var addLoad = await _loadRepository.AddAsync(load);
-        //Lógica será adicionada depois 
         return addLoad;
     }
 

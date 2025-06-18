@@ -121,7 +121,8 @@ namespace TMS.Application.Services.Implementation
             newUser.PhoneNumber = request.PhoneNumber;
             
             var identityResult = await _userRepository.AddAsync(newUser, request.Password);
-            
+
+
             if (!identityResult.Succeeded)
                 return (identityResult, null);
             

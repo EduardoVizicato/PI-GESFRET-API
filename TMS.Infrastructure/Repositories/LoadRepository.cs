@@ -26,9 +26,11 @@ public class LoadRepository: ILoadRepository
 
     public async Task<LoadRequest> AddAsync(LoadRequest load)
     {
-        var addLoad = new Load(load.Description, load.Quantity, load.Type, load.User);
+        var addLoad = new Load(load.Description, load.Quantity, load.Type, load.UserId);
+
         _context.Loads.Add(addLoad);
         await _context.SaveChangesAsync();
+
         return load;
     }
 
