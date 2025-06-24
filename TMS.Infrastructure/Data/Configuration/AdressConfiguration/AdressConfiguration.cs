@@ -34,5 +34,11 @@ public class AdressConfiguration : IEntityTypeConfiguration<Address>
             .IsRequired()
             .HasColumnName("PostalCode")
             .HasConversion(postalCode => postalCode.Value, value => new PostalCodeVO(value));
+        
+        builder.HasOne(x => x.Travel)             
+            .WithMany()                      
+            .HasForeignKey(x => x.TravelId)    
+            .IsRequired()                    
+            .OnDelete(DeleteBehavior.Restrict); 
     }
 }

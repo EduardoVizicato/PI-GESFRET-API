@@ -26,9 +26,9 @@ namespace TMS.Infrastructure.Data.Configuration.LoadConfiguration
                 .HasConversion(type => type.Value, value => new TypeVO(value));
 
 
-            builder.HasOne(l => l.User)             
+            builder.HasOne(x => x.User)             
                    .WithMany()                      
-                   .HasForeignKey(l => l.UserId)    
+                   .HasForeignKey(x => x.UserId)    
                    .IsRequired()                    
                    .OnDelete(DeleteBehavior.Restrict); 
         }
