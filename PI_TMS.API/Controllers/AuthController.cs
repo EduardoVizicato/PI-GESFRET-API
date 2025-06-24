@@ -21,9 +21,8 @@ namespace PI_TMS.API.Controllers
         {
             var token = await _loginService.LoginAsync(request.Email, request.Password);
             if (token == null)
-            {
                 return Unauthorized("Invalid credentials");
-            }
+            
             return Ok(new { Token = token });
         }
     }

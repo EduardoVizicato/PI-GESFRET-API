@@ -18,7 +18,5 @@ namespace TMS.Domain.Entites.Requests.Travel
         public float Weight { get; set; }
         public float Price { get; set; }
         public DescriptionVO Description { get; set; }
-        public Guid LoadId { get; set; }
-        public Entities.Load Load { get; set; }
     }
 }

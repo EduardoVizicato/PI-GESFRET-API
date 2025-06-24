@@ -21,8 +21,6 @@ namespace TMS.Domain.Entites
             float weight,
             float price,
             DescriptionVO description,
-            Guid loadId,
-            Load load,
             ICollection<Address> address)
         {
             TravelName = travelName;
@@ -31,7 +29,6 @@ namespace TMS.Domain.Entites
             Weight = weight;
             Price = price;
             Description = description;
-            Load = load;
             Address = address;
         }
         public string TravelName { get; private set; }
@@ -43,18 +40,16 @@ namespace TMS.Domain.Entites
         public float Weight { get; private set; }
         public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
-        public Load Load { get; private set; }
 
-        public void UpdateTravel(string travelName, 
+        public void UpdateTravel(
+            string travelName, 
             DateTime startDate, 
             DateTime endDate,
-            TravelStatus travelStatus,
             float weight,
             float price,
             DescriptionVO description,
-            Guid loadId,
-            Load load,
-            ICollection<Address> address)
+            ICollection<Address> address
+            )
         {
             TravelName = travelName;
             StartDate = startDate;
@@ -62,7 +57,6 @@ namespace TMS.Domain.Entites
             Weight = weight;
             Price = price;
             Description = description;
-            Load = load;
             Address = address;
         }
 

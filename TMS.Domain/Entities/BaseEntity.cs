@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMS.Domain.Entities.Interfaces;
 
 namespace TMS.Domain.Entites
 {
-    public class BaseEntity : IBaseEntity
-    {
+    public class BaseEntity {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public bool IsActive { get; set; } = true;

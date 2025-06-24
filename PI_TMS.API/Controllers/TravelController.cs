@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.Travel;
+using TMS.Domain.Entites.Responses.Travel;
 
 namespace PI_TMS.API.Controllers
 {
@@ -21,9 +22,7 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _travelService.GetAllAsync();
             if (data == null)
-            {
                 return BadRequest();
-            }
 
             return Ok(data);
         }
@@ -43,9 +42,7 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _travelService.GetByIdAsync(id);
             if (data == null)
-            {
                 return BadRequest();
-            }
             
             return Ok(data);
         }
@@ -55,9 +52,17 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _travelService.ChangeStatusAsync(id);
             if (data == null)
-            {
                 return BadRequest();
-            }
+            
+            return Ok(data);
+        }
+
+        [HttpPut("updateTravel")]
+        public async Task<IActionResult> UpdateTravel(Guid id, TravelResponse travel)
+        {
+            var data = await _travelService.UpdatesAsync(id, travel);
+            if (data == null)
+                return BadRequest();
             
             return Ok(data);
         }
@@ -67,9 +72,7 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _travelService.CancelTravel(id);
             if (data == null)
-            {
                 return BadRequest();
-            }
             
             return Ok(data);
         }

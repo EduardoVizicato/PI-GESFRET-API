@@ -32,7 +32,6 @@ namespace PI_TMS.API.Controllers
         [HttpPost("addUser")]
         public async Task<IActionResult> AddUser(RegisterUserRequest user)
         {
-
             var data = await _userService.RegisterUser(user);
             return Ok(data);
         }

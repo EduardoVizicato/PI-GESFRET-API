@@ -22,6 +22,8 @@ public class Address : BaseEntity
     public StateVO State { get; private set; }
     public PostalCodeVO PostalCode { get; private set; }
     public int AdressNumber { get; private set; }
+    public Guid TravelId { get; set; }
+    public Travel Travel { get; set; }
 
     public void Update(StreetVO street, CityVO city, StateVO state, PostalCodeVO postalCode, int adressNumber)
     {

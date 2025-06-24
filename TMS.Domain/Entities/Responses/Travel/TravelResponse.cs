@@ -13,7 +13,8 @@ namespace TMS.Domain.Entites.Responses.Travel
         public string TravelName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Address Adress { get; private set; }
+        
+        public ICollection<Address> Address { get; private set; }
         public float Weight { get; set; }
         public float Price { get; set; }
         public DescriptionVO Description { get; set; }

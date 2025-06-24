@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.Load;
+using TMS.Domain.Entites.Responses.Load;
 
 namespace PI_TMS.API.Controllers
 {
@@ -27,9 +28,8 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _loadService.AddAsync(load);
             if (data == null)
-            {
                 return BadRequest();
-            }
+            
             return Ok(data);
         }
         
@@ -38,9 +38,18 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _loadService.GetByIdAsync(id);
             if (data == null)
-            {
                 return BadRequest();
-            }
+            
+            return Ok(data);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateLoad(Guid id, LoadResponse load)
+        {
+            var data = await _loadService.UpdatesAsync(id, load);
+            if (data == null)
+                return BadRequest();
+            
             return Ok(data);
         }
         
@@ -49,9 +58,8 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _loadService.DesactiveAsync(id);
             if (data == null)
-            {
                 return BadRequest();
-            }
+            
             return Ok(data);
         }
         
@@ -60,9 +68,7 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _loadService.GetAllActived();
             if (data == null)
-            {
                 return BadRequest();
-            }
 
             return Ok(data);
         }
@@ -72,9 +78,8 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _loadService.GetAllDesactived();
             if (data == null)
-            {
                 return BadRequest();
-            }
+            
             return Ok(data);
         }
     }

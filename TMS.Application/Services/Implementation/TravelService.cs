@@ -19,9 +19,7 @@ public class TravelService : ITravelService
     {
         var getAllTravels = await _travelRepository.GetAllAsync();
         if (getAllTravels == null)
-        {
             return null;
-        }
 
         return getAllTravels;
     }
@@ -30,10 +28,8 @@ public class TravelService : ITravelService
     {
         var travelById = await _travelRepository.GetByIdAsync(id);
         if(travelById == null)
-        {
             return null;
-        }
-
+        
         return travelById;
     }
 
@@ -44,18 +40,22 @@ public class TravelService : ITravelService
         return addTravel;
     }
 
-    public Task<bool?> UpdatesAsync(Guid id, TravelResponse travel)
+    public async Task<bool?> UpdatesAsync(Guid id, TravelResponse travel)
     {
-        throw new NotImplementedException();
+        var checkId = await _travelRepository.GetByIdAsync(id);
+        if(checkId == null)
+            return false;
+        
+        var updateTravel = await _travelRepository.UpdatesAsync(id, travel);
+        return updateTravel;
     }
 
     public async Task<bool> ChangeStatusAsync(Guid id)
     {
         var checkId = await _travelRepository.GetByIdAsync(id);
         if(checkId == null)
-        {
             return false;
-        }
+
         var changeTravelStatus = await _travelRepository.ChangeStatusAsync(id);
 
         return changeTravelStatus;
@@ -66,9 +66,8 @@ public class TravelService : ITravelService
         var cancelTravel = await _travelRepository.CancelTravel(id);
 
         if(id == null)
-        {
             return false;
-        }
+
         return cancelTravel;
     }
 }

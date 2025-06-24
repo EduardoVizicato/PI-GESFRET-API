@@ -44,9 +44,14 @@ public class LoadService : ILoadService
         return addLoad;
     }
 
-    public Task<bool?> UpdatesAsync(Guid id, LoadResponse load)
+    public async Task<bool?> UpdatesAsync(Guid id, LoadResponse load)
     {
-        throw new NotImplementedException();
+        var checkId = await _loadRepository.GetByIdAsync(id);
+        if(checkId == null)
+            return false;
+        
+        var updateLoad = await _loadRepository.UpdatesAsync(id, load);
+        return updateLoad;
     }
 
     public async Task<bool?> DesactiveAsync(Guid id)
