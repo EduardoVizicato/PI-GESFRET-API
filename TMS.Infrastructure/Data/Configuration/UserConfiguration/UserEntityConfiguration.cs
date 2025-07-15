@@ -25,7 +25,7 @@ namespace TMS.Infrastructure.Data.Configuration.UserConfiguration
             builder.Property(x => x.TaxId)
                 .IsRequired()
                 .HasColumnName("TaxID")
-                .HasConversion(taxId => taxId.Value, value => new TaxIdVO(value));
+                .HasConversion(taxId => taxId.TaxId, value => new TaxIdVO(value));
             
             builder.Property(x => x.CreatedAt)
                 .IsRequired()

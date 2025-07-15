@@ -14,7 +14,7 @@ namespace TMS.Infrastructure.Data.Configuration.LoadConfiguration
             builder.Property(x => x.Description)
                 .IsRequired()
                 .HasColumnName("Description")
-                .HasConversion(description => description.Value, value => new DescriptionVO(value));
+                .HasConversion(description => description.Description, value => new DescriptionVO(value));
 
             builder.Property(x => x.Quantity)
                 .HasColumnName("Quantity")
@@ -23,7 +23,7 @@ namespace TMS.Infrastructure.Data.Configuration.LoadConfiguration
             builder.Property(x => x.Type)
                 .IsRequired()
                 .HasColumnName("Type")
-                .HasConversion(type => type.Value, value => new TypeVO(value));
+                .HasConversion(type => type.Type, value => new TypeVO(value));
 
 
             builder.HasOne(x => x.User)             

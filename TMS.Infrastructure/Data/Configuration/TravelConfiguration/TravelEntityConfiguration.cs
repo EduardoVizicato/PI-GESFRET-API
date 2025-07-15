@@ -40,7 +40,7 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
             
             builder.Property(x => x.Description)
                 .IsRequired()
-                .HasConversion(description => description.Value, value => new DescriptionVO(value))
+                .HasConversion(description => description.Description, value => new DescriptionVO(value))
                 .HasColumnName("Description");
         }
     }

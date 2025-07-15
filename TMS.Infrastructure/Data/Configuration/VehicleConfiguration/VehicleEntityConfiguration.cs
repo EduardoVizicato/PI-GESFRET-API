@@ -24,7 +24,7 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
             builder.Property(x => x.VehicleRegistrationPlate)
                 .HasColumnName("VehicleRegistrationPlate")
                 .IsRequired()
-                .HasConversion(registrationPlate => registrationPlate.Value, value => new VehicleRegistrationPlateVO(value));
+                .HasConversion(registrationPlate => registrationPlate.RegistrationPlate, value => new VehicleRegistrationPlateVO(value));
         }
     }
 }

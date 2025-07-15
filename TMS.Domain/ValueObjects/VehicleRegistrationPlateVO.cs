@@ -9,12 +9,11 @@ public class VehicleRegistrationPlateVO
         RegistrationPlate = registrationPlate;
     }
     
-    public string Value => RegistrationPlate;
     public string RegistrationPlate { get; set; }
-
-    public static bool IsValidFormat(string sanitizedPhone)
+    
+    public static bool IsValidFormat(string sanitizedPlate)
     {
-        return !string.IsNullOrWhiteSpace(sanitizedPhone) &&
-               sanitizedPhone.Length == 7;
+        return !string.IsNullOrWhiteSpace(sanitizedPlate) &&
+               sanitizedPlate.Length == 7;
     }
 }

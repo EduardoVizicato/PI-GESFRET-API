@@ -10,8 +10,7 @@ public class PostalCodeVO
         }
         PostalCode = postalCode;
     }
-
-    public string Value => PostalCode;
+    
     public string PostalCode { get; }
     
     public static string Sanitize(string postalCodeInput)

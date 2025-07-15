@@ -7,8 +7,6 @@ public class CityVO
         if(!IsValidFormat(city))
             throw new ArgumentException("Invalid City name");
     }
-
-    public string Value => City;
     public string City { get; }
 
     public static bool IsValidFormat(string validCity)

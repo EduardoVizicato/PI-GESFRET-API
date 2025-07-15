@@ -9,8 +9,6 @@ public class NameVO
 
         Name = name;
     }
-
-    public string Value => Name;
     public string Name { get; }
 
     public static bool IsValidFormat(string validName)

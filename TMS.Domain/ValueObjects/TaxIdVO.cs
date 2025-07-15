@@ -12,7 +12,6 @@ public class TaxIdVO
         TaxId = taxId;
     }
     
-    public string Value =>  TaxId;
     public string TaxId { get; set; }
     
     

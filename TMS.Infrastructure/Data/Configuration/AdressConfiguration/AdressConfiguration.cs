@@ -14,17 +14,17 @@ public class AdressConfiguration : IEntityTypeConfiguration<Address>
         builder.Property(x => x.City)
             .IsRequired()
             .HasColumnName("City")
-            .HasConversion(city => city.Value, value => new CityVO(value));
+            .HasConversion(city => city.City, value => new CityVO(value));
         
         builder.Property(x => x.State)
             .IsRequired()
             .HasColumnName("State")
-            .HasConversion(state => state.Value, value => new StateVO(value));
+            .HasConversion(state => state.State, value => new StateVO(value));
         
         builder.Property(x => x.Street)
             .IsRequired()
             .HasColumnName("Street")
-            .HasConversion(street => street.Value, value => new StreetVO(value));
+            .HasConversion(street => street.Street, value => new StreetVO(value));
 
         builder.Property(x => x.AdressNumber)
             .IsRequired()
@@ -33,7 +33,7 @@ public class AdressConfiguration : IEntityTypeConfiguration<Address>
         builder.Property(x => x.PostalCode)
             .IsRequired()
             .HasColumnName("PostalCode")
-            .HasConversion(postalCode => postalCode.Value, value => new PostalCodeVO(value));
+            .HasConversion(postalCode => postalCode.PostalCode, value => new PostalCodeVO(value));
         
         builder.HasOne(x => x.Travel)             
             .WithMany()                      

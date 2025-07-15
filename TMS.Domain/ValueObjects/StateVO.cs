@@ -14,6 +14,5 @@ public class StateVO
         
         State = state;
     }
-    public string Value => State;
     public string State { get; }
 }

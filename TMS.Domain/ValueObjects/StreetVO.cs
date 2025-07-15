@@ -14,7 +14,6 @@ public class StreetVO
         
         Street = street;
     }
-
-    public string Value => Street;
+    
     public string Street { get; }
 }
