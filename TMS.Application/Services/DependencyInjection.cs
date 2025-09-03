@@ -21,7 +21,6 @@ namespace TMS.Service.Services
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVehicleService, VehicleService>();
-            services.AddScoped<ILoadService, LoadService>();
             services.AddScoped<ITravelService, TravelService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ILoginService, LoginService>();

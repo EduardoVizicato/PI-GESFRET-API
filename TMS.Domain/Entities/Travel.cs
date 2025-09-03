@@ -20,24 +20,21 @@ namespace TMS.Domain.Entites
             DateTime endDate,
             float weight,
             float price,
-            DescriptionVO description,
-            ICollection<Address> address)
+            DescriptionVO description
+            )
         {
             TravelName = travelName;
             StartDate = startDate;
             EndDate = endDate;
-            Weight = weight;
             Price = price;
             Description = description;
-            Address = address;
         }
         public string TravelName { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public TravelStatus TravelStatus { get; private set; } = TravelStatus.Todo;
         public DateTime DateCreate { get; } = DateTime.Now;
-        public ICollection<Address> Address { get; private set; }
-        public float Weight { get; private set; }
+        public LoadVO Load { get; private set; }
         public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
 
@@ -47,17 +44,14 @@ namespace TMS.Domain.Entites
             DateTime endDate,
             float weight,
             float price,
-            DescriptionVO description,
-            ICollection<Address> address
+            DescriptionVO description
             )
         {
             TravelName = travelName;
             StartDate = startDate;
             EndDate = endDate;
-            Weight = weight;
             Price = price;
             Description = description;
-            Address = address;
         }
 
         private static Dictionary<TravelStatus, TravelStatus> _nextStatus = new()

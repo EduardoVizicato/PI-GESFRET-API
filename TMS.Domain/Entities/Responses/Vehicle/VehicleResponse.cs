@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMS.Domain.Entites.Enums;
 using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites.Responses.Vehicle

@@ -33,8 +33,7 @@ public class TravelRepository : ITravelRepository
             travel.EndDate,
             travel.Weight,
             travel.Price,
-            travel.Description,
-            travel.Address
+            travel.Description
             );
         _context.Travels.Add(addTravel);
         await _context.SaveChangesAsync();
@@ -44,7 +43,7 @@ public class TravelRepository : ITravelRepository
     public async Task<bool?> UpdatesAsync(Guid id, TravelResponse travel)
     {
         var updateTravel = await _context.Travels.FindAsync(id);
-        updateTravel.UpdateTravel(travel.TravelName, travel.StartDate, travel.EndDate, travel.Weight, travel.Price, travel.Description, travel.Address);
+        updateTravel.UpdateTravel(travel.TravelName, travel.StartDate, travel.EndDate, travel.Weight, travel.Price, travel.Description);
         _context.Travels.Update(updateTravel);
         return await _context.SaveChangesAsync() > 0;
     }
