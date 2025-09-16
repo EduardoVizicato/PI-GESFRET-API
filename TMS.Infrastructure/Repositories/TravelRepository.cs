@@ -31,9 +31,9 @@ public class TravelRepository : ITravelRepository
             travel.TravelName,
             travel.StartDate,
             travel.EndDate,
-            travel.Weight,
             travel.Price,
-            travel.Description
+            travel.Description,
+            travel.Load
             );
         _context.Travels.Add(addTravel);
         await _context.SaveChangesAsync();

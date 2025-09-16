@@ -11,16 +11,12 @@ namespace TMS.Domain.Entites
 {
     public class Travel : BaseEntity
     {
-        public Travel()
-        {
-            
-        }
         public Travel(string travelName, 
             DateTime startDate, 
             DateTime endDate,
-            float weight,
-            float price,
-            DescriptionVO description
+            decimal price,
+            DescriptionVO description,
+            LoadVO load
             )
         {
             TravelName = travelName;
@@ -28,22 +24,26 @@ namespace TMS.Domain.Entites
             EndDate = endDate;
             Price = price;
             Description = description;
+            Load = load;
+            TravelStatus = TravelStatus.Todo;
+            CreatedAt = DateTime.Now;
         }
         public string TravelName { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
-        public TravelStatus TravelStatus { get; private set; } = TravelStatus.Todo;
-        public DateTime DateCreate { get; } = DateTime.Now;
-        public LoadVO Load { get; private set; }
-        public float Price { get; private set; }
+        public TravelStatus TravelStatus { get; private set; }
         public DescriptionVO Description { get; private set; }
+        public LoadVO Load { get; private set; }
+        public decimal Price { get; private set; }
+        public DateTime CreatedAt { get; }
+        public DateTime? UpdatedAt { get; set; }
 
         public void UpdateTravel(
             string travelName, 
             DateTime startDate, 
             DateTime endDate,
             float weight,
-            float price,
+            decimal price,
             DescriptionVO description
             )
         {
@@ -52,6 +52,7 @@ namespace TMS.Domain.Entites
             EndDate = endDate;
             Price = price;
             Description = description;
+            UpdatedAt = DateTime.Now;
         }
 
         private static Dictionary<TravelStatus, TravelStatus> _nextStatus = new()

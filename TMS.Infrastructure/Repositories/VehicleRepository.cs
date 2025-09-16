@@ -40,7 +40,7 @@ public class VehicleRepository : IVehicleRepository
 
     public async Task<VehicleRequest> AddVehicleAsync(VehicleRequest vehicle)
     {
-        var addVehicle = new Vehicle(vehicle.Name, vehicle.VehicleRegistrationPlate);
+        var addVehicle = new Vehicle(vehicle.Name, vehicle.VehicleRegistrationPlate, vehicle.Type, vehicle.Rodado, vehicle.Carroceria);
         
         if (addVehicle.Name == null || addVehicle.VehicleRegistrationPlate == null)
         {
@@ -60,7 +60,7 @@ public class VehicleRepository : IVehicleRepository
             _logger.LogError($"veículo de Id: {id} não encontrado");
         }
 
-        vehicleToUpdate.UpdateVehicle(vehicle.Name, vehicle.VehicleRegistrationPlate);
+        vehicleToUpdate.UpdateVehicle(vehicle.Name, vehicle.VehicleRegistrationPlate, vehicle.Type, vehicle.Rodado, vehicle.Carroceria);
         
         _context.Vehicles.Update(vehicleToUpdate);
         _context.SaveChanges();
