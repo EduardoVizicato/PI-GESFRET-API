@@ -16,27 +16,34 @@ namespace TMS.Domain.Entites
             
         }
         public Travel(string travelName, 
-            DateTime startDate, 
+            DateTime startDate,
             DateTime endDate,
             float weight,
             float price,
-            DescriptionVO description
+            DescriptionVO description,
+            AddressVO origin,
+            AddressVO destination
             )
         {
             TravelName = travelName;
             StartDate = startDate;
             EndDate = endDate;
+            TravelStatus = TravelStatus.Todo;
             Price = price;
             Description = description;
+            Origin = origin;
+            CreatedAt = DateTime.UtcNow;
         }
         public string TravelName { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
-        public TravelStatus TravelStatus { get; private set; } = TravelStatus.Todo;
-        public DateTime DateCreate { get; } = DateTime.Now;
+        public TravelStatus TravelStatus { get; private set; }
+        public DateTime CreatedAt { get; }
         public LoadVO Load { get; private set; }
         public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
+        public AddressVO Origin { get; private set; }
+        public AddressVO Destination { get; private set; }
 
         public void UpdateTravel(
             string travelName, 
@@ -44,7 +51,9 @@ namespace TMS.Domain.Entites
             DateTime endDate,
             float weight,
             float price,
-            DescriptionVO description
+            DescriptionVO description,
+            AddressVO origin,
+            AddressVO destination
             )
         {
             TravelName = travelName;
@@ -52,6 +61,8 @@ namespace TMS.Domain.Entites
             EndDate = endDate;
             Price = price;
             Description = description;
+            Origin = origin;
+            Destination = destination;
         }
 
         private static Dictionary<TravelStatus, TravelStatus> _nextStatus = new()
