@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TMS.Domain.Entites;
 using TMS.Domain.Entities;
@@ -15,34 +16,40 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
     {
         public void Configure(EntityTypeBuilder<Travel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(t => t.Id);
 
-            builder.Property(x => x.TravelName)
+            builder.Property(t => t.TravelName)
                 .IsRequired()
                 .HasColumnName("TravelName")
                 .HasMaxLength(100);
 
-            builder.Property(x => x.StartDate)
+            builder.Property(t => t.StartDate)
                 .HasColumnName("StartDate")
                 .IsRequired();
 
-            builder.Property(x => x.EndDate)
+            builder.Property(t => t.EndDate)
                 .HasColumnName("EndData")
                 .IsRequired();
 
-            builder.Property(x => x.DateCreate)
+            builder.Property(t => t.CreatedAt)
                 .HasColumnName("DateCreate")
                 .IsRequired();
 
-            builder.Property(x => x.Load)
-                .IsRequired()
-                .HasConversion(load => new { load.Name, load.Weight, load.LoadType }, value => new LoadVO(value.Name, value.Weight, value.LoadType))
-                .HasColumnName("Load");
+            builder.Property(t => t.Load)
+            .HasConversion(
+                load => JsonSerializer.Serialize(load, (JsonSerializerOptions)null),
+                value => JsonSerializer.Deserialize<LoadVO>(value, (JsonSerializerOptions)null))
+             .HasColumnName("Load");
 
-            builder.Property(x => x.Description)
+            builder.Property(t => t.Description)
                 .IsRequired()
                 .HasConversion(description => description.Description, value => new DescriptionVO(value))
                 .HasColumnName("Description");
+
+            builder.Property(t => t.Price)
+                .IsRequired()
+                .HasColumnName("Price");
+
         }
     }
 }

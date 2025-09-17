@@ -136,7 +136,6 @@ namespace TMS.Application.Services.Implementation
                 Email = newUser.Email,
                 TaxId = newUser.TaxId,
                 PhoneNumber = newUser.PhoneNumber,
-                CreatedAt = newUser.CreatedAt
             };
 
             // 8. Return the success result and the mapped response.

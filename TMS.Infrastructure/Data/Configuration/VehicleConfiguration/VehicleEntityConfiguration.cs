@@ -14,17 +14,29 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
     {
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(v => v.Id);
 
-            builder.Property(x => x.Name)
+            builder.Property(v => v.Name)
                 .HasMaxLength(50)
                 .HasColumnName("Name")
                 .IsRequired();
             
-            builder.Property(x => x.VehicleRegistrationPlate)
+            builder.Property(v => v.VehicleRegistrationPlate)
                 .HasColumnName("VehicleRegistrationPlate")
                 .IsRequired()
                 .HasConversion(registrationPlate => registrationPlate.RegistrationPlate, value => new VehicleRegistrationPlateVO(value));
+
+            builder.Property(v => v.Type)
+                .IsRequired()
+                .HasColumnName("Type");
+
+            builder.Property(v => v.Rodado)
+                .IsRequired()
+                .HasColumnName("Rodado");
+
+            builder.Property(v => v.Carroceria)
+                .IsRequired()
+                .HasColumnName("Carroceria");
         }
     }
 }

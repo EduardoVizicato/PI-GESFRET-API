@@ -12,16 +12,14 @@ public class UserModel : IdentityUser<Guid>
         FirstName = firstName;
         LastName = lastName;
         TaxId = taxId;
-        CreatedAt = DateTime.UtcNow;
-        IsActive = true;
     }
     
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public TaxIdVO TaxId { get; private set; }
-    public bool IsActive { get; private set; }
-    public DateTime CreatedAt { get; set; }
+    public bool IsActive { get; set; } = true;
     public DateTime? UpdatedAt { get; set; }
+
     public void UpdateUser(string firstName, string lastName, TaxIdVO taxId)
     {
         FirstName = firstName;

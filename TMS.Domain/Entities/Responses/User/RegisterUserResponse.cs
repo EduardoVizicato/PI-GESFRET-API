@@ -15,7 +15,5 @@ namespace TMS.Domain.Entites.Responses.User
         public TaxIdVO TaxId { get; init; }
         
         public string PhoneNumber { get; init; }
-
-        public DateTime CreatedAt { get; init; }
     }
 }

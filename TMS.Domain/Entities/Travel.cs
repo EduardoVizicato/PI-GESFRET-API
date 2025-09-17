@@ -11,49 +11,40 @@ namespace TMS.Domain.Entites
 {
     public class Travel : BaseEntity
     {
-        public Travel()
-        {
-            
-        }
         public Travel(string travelName, 
-            DateTime startDate,
+            DateTime startDate, 
             DateTime endDate,
-            float weight,
-            float price,
+            decimal price,
             DescriptionVO description,
-            AddressVO origin,
-            AddressVO destination
+            LoadVO load
             )
         {
             TravelName = travelName;
             StartDate = startDate;
             EndDate = endDate;
-            TravelStatus = TravelStatus.Todo;
             Price = price;
             Description = description;
-            Origin = origin;
-            CreatedAt = DateTime.UtcNow;
+            Load = load;
+            TravelStatus = TravelStatus.Todo;
+            CreatedAt = DateTime.Now;
         }
         public string TravelName { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public TravelStatus TravelStatus { get; private set; }
-        public DateTime CreatedAt { get; }
-        public LoadVO Load { get; private set; }
-        public float Price { get; private set; }
         public DescriptionVO Description { get; private set; }
-        public AddressVO Origin { get; private set; }
-        public AddressVO Destination { get; private set; }
+        public LoadVO Load { get; private set; }
+        public decimal Price { get; private set; }
+        public DateTime CreatedAt { get; }
+        public DateTime? UpdatedAt { get; set; }
 
         public void UpdateTravel(
             string travelName, 
             DateTime startDate, 
             DateTime endDate,
             float weight,
-            float price,
-            DescriptionVO description,
-            AddressVO origin,
-            AddressVO destination
+            decimal price,
+            DescriptionVO description
             )
         {
             TravelName = travelName;
@@ -61,8 +52,7 @@ namespace TMS.Domain.Entites
             EndDate = endDate;
             Price = price;
             Description = description;
-            Origin = origin;
-            Destination = destination;
+            UpdatedAt = DateTime.Now;
         }
 
         private static Dictionary<TravelStatus, TravelStatus> _nextStatus = new()

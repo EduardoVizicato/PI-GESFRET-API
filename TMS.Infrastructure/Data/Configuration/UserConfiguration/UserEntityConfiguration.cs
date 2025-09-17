@@ -27,12 +27,6 @@ namespace TMS.Infrastructure.Data.Configuration.UserConfiguration
                 .HasColumnName("TaxID")
                 .HasConversion(taxId => taxId.TaxId, value => new TaxIdVO(value));
             
-            builder.Property(x => x.CreatedAt)
-                .IsRequired()
-                .HasColumnName("CreatedAt")
-                .HasColumnType("datetime2")
-                .HasDefaultValueSql("getdate()");
-            
             builder.Property(x => x.UpdatedAt)
                 .HasColumnName("UpdatedAt")
                 .HasColumnType("datetime2");
