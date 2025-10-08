@@ -26,15 +26,15 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
                 .IsRequired()
                 .HasConversion(registrationPlate => registrationPlate.RegistrationPlate, value => new VehicleRegistrationPlateVO(value));
 
-            builder.Property(v => v.Type)
+            builder.Property(v => v.TruckType)
                 .IsRequired()
                 .HasColumnName("Type");
 
-            builder.Property(v => v.Rodado)
+            builder.Property(v => v.WheelType)
                 .IsRequired()
                 .HasColumnName("Rodado");
 
-            builder.Property(v => v.Carroceria)
+            builder.Property(v => v.BodyType)
                 .IsRequired()
                 .HasColumnName("Carroceria");
         }

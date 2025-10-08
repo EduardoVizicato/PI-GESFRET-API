@@ -44,7 +44,7 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpPut("updateUser")]
-        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] RegisterUserResponse user)
+        public async Task<IActionResult> UpdateUser(Guid id, RegisterUserResponse user)
         {
             var data = await _userService.UpdateUser(id, user);
             return Ok(data);

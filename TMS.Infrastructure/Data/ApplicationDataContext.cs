@@ -32,4 +32,5 @@ namespace TMS.Infrastructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);
         }
     }
+
 }

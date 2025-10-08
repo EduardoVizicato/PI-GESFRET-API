@@ -202,7 +202,7 @@ namespace TMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Travels");
+                    b.ToTable("Travels", (string)null);
                 });
 
             modelBuilder.Entity("TMS.Domain.Entites.Vehicle", b =>
@@ -245,7 +245,7 @@ namespace TMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
                 });
 
             modelBuilder.Entity("UserModel", b =>
