@@ -13,7 +13,7 @@ namespace TMS.Domain.Entites.Responses.Vehicle
         public string Name { get; set; }
         public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; set; }
         public VehicleType TruckType { get; private set; }
-        public RodadoEnum WheelType { get; private set; }
-        public CarroceriaEnum BodyType { get; private set; }
+        public RodadoEnum? WheelType { get; private set; }
+        public CarroceriaEnum? BodyType { get; private set; }
     }
 }
