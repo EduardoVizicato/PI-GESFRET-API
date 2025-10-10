@@ -49,19 +49,18 @@ public class VehicleRepository : IVehicleRepository
             vehicle.BodyType ?? CarroceriaEnum.Null
         );
 
-        // Validação dos campos obrigatórios
         if (string.IsNullOrWhiteSpace(addVehicle.Name) || addVehicle.VehicleRegistrationPlate == null)
         {
             _logger.LogWarning("Preencha todos os campos obrigatórios");
             throw new ArgumentException("Preencha todos os campos obrigatórios");
         }
 
-        _context.Vehicles.Add(addVehicle);
+        //_context.Vehicles.Add(addVehicle);
         await _context.SaveChangesAsync();
         return vehicle;
     }
 
-    public async Task<bool?> UpdateVehicleAsync(Guid id, VehicleResponse vehicle)
+    public async Task<bool> UpdateVehicleAsync(Guid id, VehicleResponse vehicle)
     {
         var vehicleToUpdate = await _context.Vehicles.FindAsync(id);
         if (vehicleToUpdate == null)
@@ -73,10 +72,11 @@ public class VehicleRepository : IVehicleRepository
         vehicleToUpdate.UpdateVehicle(
             vehicle.Name,
             vehicle.VehicleRegistrationPlate,
-            vehicle.TruckType,           
-            vehicle.WheelType ?? RodadoEnum.Null,             
-            vehicle.BodyType ?? CarroceriaEnum.Null
+            vehicle.TruckType,
+            vehicle.WheelType ?? RodadoEnum.Null, 
+            vehicle.BodyType ?? CarroceriaEnum.Null 
         );
+
 
         _context.Vehicles.Update(vehicleToUpdate);
         await _context.SaveChangesAsync();
