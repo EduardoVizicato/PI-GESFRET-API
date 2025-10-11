@@ -11,11 +11,11 @@ namespace TMS.Domain.Entites.Requests.Travel
 {
     public class TravelRequest
     {
-        public string TravelName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal Price { get; set; }
-        public DescriptionVO Description { get; set; }
+        public AddressVO Origin { get; set; }
+        public AddressVO Destination { get; set; }
         public LoadVO Load { get; set; }
+        public decimal Price { get; set; }
     }
 }
