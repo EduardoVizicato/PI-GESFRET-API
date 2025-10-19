@@ -61,13 +61,4 @@ public class UserTest
         _userRepositoryMock.Verify(r => r.AddAsync(It.Is<UserModel>(u => u.Email == request.Email), request.Password), Times.Once);
     }
 
-
-    private UserModel UserModelFactory()
-    {
-        return new UserModel(
-            "John",
-            "Doe",
-            new TaxIdVO("12345678901")
-        );
-    }
 }

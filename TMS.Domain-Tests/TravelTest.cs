@@ -9,6 +9,6 @@ public class TravelTest
     [Fact]
     public void Should_Travel_Register_ResultOK()
     {
-        
+        throw new NotImplementedException();
     }
 }
