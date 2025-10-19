@@ -8,26 +8,36 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites.Requests.User
 {
-    public record RegisterUserRequest
+    public class RegisterUserRequest
     {
-        [Required]
-        public string FirstName { get; init; }
+        public RegisterUserRequest(string firstName, string lastName, string email, string password, string phoneNumber, TaxIdVO taxId)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            PhoneNumber = phoneNumber;
+            TaxId = taxId;
+        }
 
         [Required]
-        public string LastName { get; init; }
+        public string FirstName { get; private set; }
+
+        [Required]
+        public string LastName { get; private set; }
 
         [Required]
         [EmailAddress]
-        public string Email { get; init; }
+        public string Email { get; private set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; init; }
+        public string Password { get; private set; }
 
         [Required]
-        public string PhoneNumber { get; init; }
+        public string PhoneNumber { get; private set; }
 
         [Required]
-        public TaxIdVO TaxId { get; init; }
+        public TaxIdVO TaxId { get; private set; }
     }
 }
