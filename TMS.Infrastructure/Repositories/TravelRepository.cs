@@ -28,11 +28,11 @@ public class TravelRepository : ITravelRepository
     public async Task<TravelRequest> AddAsync(TravelRequest travel)
     {
         var addTravel = new Travel(
-            travel.TravelName,
             travel.StartDate,
             travel.EndDate,
+            travel.Origin,
+            travel.Destination,
             travel.Price,
-            travel.Description,
             travel.Load
             );
         _context.Travels.Add(addTravel);
@@ -43,22 +43,24 @@ public class TravelRepository : ITravelRepository
     public async Task<bool?> UpdatesAsync(Guid id, TravelResponse travel)
     {
         var updateTravel = await _context.Travels.FindAsync(id);
-        updateTravel.UpdateTravel(travel.TravelName, travel.StartDate, travel.EndDate, travel.Weight, travel.Price, travel.Description);
+        updateTravel.UpdateTravel(travel.StartDate,travel.EndDate,travel.Origin,travel.Destination,travel.Price,travel.Load);
         _context.Travels.Update(updateTravel);
         return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> ChangeStatusAsync(Guid id)
     {
-        var changeStatus = await _context.Travels.FindAsync(id);
-        changeStatus.AdvanceStatus();
-        return await _context.SaveChangesAsync() > 0;
+        return false;
+        //var changeStatus = await _context.Travels.FindAsync(id);
+        //changeStatus.ChangeStatus();
+        //return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> CancelTravel(Guid id)
     {
-        var checkStatus = await _context.Travels.FindAsync(id);
-        checkStatus.CancelTravel();
-        return await _context.SaveChangesAsync() > 0;
+        return false;
+        //var checkStatus = await _context.Travels.FindAsync(id);
+        //checkStatus.CancelTravel();
+        //return await _context.SaveChangesAsync() > 0;
     }
 }

@@ -8,6 +8,7 @@ using TMS.Infrastructure;
 using TMS.Infrastructure.Data;
 using TMS.Infrastructure.OptionsSetup;
 using TMS.Service.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -16,7 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
     //builder.Configuration.AddAzureKeyVault(
     //    new Uri(keyVaultUrl),
     //    new DefaultAzureCredential());
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+      .AddNewtonsoftJson(options =>
+      {
+          options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+      });
     builder.Services.AddInfrastructure();
     builder.Services.AddApplication();
 

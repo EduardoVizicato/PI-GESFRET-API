@@ -12,8 +12,8 @@ namespace TMS.Domain.Entites.Requests.Vehicle
     {
         public string Name { get; set; }
         public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; set; }
-        public VehicleType Type { get; private set; }
-        public RodadoEnum Rodado { get; private set; }
-        public CarroceriaEnum Carroceria { get; private set; }
+        public VehicleType TruckType { get; set; }
+        public RodadoEnum? WheelType { get; set; }
+        public CarroceriaEnum? BodyType { get; set; }
     }
 }

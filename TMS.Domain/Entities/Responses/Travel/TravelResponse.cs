@@ -10,12 +10,13 @@ namespace TMS.Domain.Entites.Responses.Travel
 {
     public class TravelResponse
     {
-        public string TravelName { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public float Weight { get; set; }
-        public decimal Price { get; set; }
-        public DescriptionVO Description { get; set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
+        public AddressVO Origin { get; private set; }
+        public AddressVO Destination { get; private set; }
+        public LoadVO Load { get; private set; }
+        public decimal Price { get; private set; }
+        public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; }
     }
 }

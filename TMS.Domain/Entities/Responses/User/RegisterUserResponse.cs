@@ -6,14 +6,14 @@ namespace TMS.Domain.Entites.Responses.User
     public record RegisterUserResponse
     {
         
-        public string FirstName { get; init; }
+        public string FirstName { get; set; }
         
-        public string LastName { get; init; }
+        public string LastName { get; set; }
         
-        public string Email { get; init; }
+        public string Email { get; set; }
         
-        public TaxIdVO TaxId { get; init; }
+        public TaxIdVO TaxId { get; set; }
         
-        public string PhoneNumber { get; init; }
+        public string PhoneNumber { get; set; }
     }
 }

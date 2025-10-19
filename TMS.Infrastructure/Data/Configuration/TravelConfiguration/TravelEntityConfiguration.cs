@@ -18,11 +18,6 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
         {
             builder.HasKey(t => t.Id);
 
-            builder.Property(t => t.TravelName)
-                .IsRequired()
-                .HasColumnName("TravelName")
-                .HasMaxLength(100);
-
             builder.Property(t => t.StartDate)
                 .HasColumnName("StartDate")
                 .IsRequired();
@@ -35,16 +30,23 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
                 .HasColumnName("DateCreate")
                 .IsRequired();
 
+            builder.Property(t => t.Origin)
+            .HasConversion(
+                origin => JsonSerializer.Serialize(origin, (JsonSerializerOptions)null),
+                value => JsonSerializer.Deserialize<AddressVO>(value, (JsonSerializerOptions)null))
+             .HasColumnName("Origin");
+
+            builder.Property(t => t.Destination)
+            .HasConversion(
+                destination => JsonSerializer.Serialize(destination, (JsonSerializerOptions)null),
+                value => JsonSerializer.Deserialize<AddressVO>(value, (JsonSerializerOptions)null))
+             .HasColumnName("Destination");
+
             builder.Property(t => t.Load)
             .HasConversion(
                 load => JsonSerializer.Serialize(load, (JsonSerializerOptions)null),
                 value => JsonSerializer.Deserialize<LoadVO>(value, (JsonSerializerOptions)null))
              .HasColumnName("Load");
-
-            builder.Property(t => t.Description)
-                .IsRequired()
-                .HasConversion(description => description.Description, value => new DescriptionVO(value))
-                .HasColumnName("Description");
 
             builder.Property(t => t.Price)
                 .IsRequired()
