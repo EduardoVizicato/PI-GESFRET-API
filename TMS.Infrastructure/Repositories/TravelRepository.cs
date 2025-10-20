@@ -2,7 +2,6 @@
 using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Travel;
 using TMS.Domain.Entites.Responses.Travel;
-using TMS.Domain.Entities.Enums;
 using TMS.Domain.Repositories;
 using TMS.Infrastructure.Data;
 
@@ -48,19 +47,16 @@ public class TravelRepository : ITravelRepository
         return await _context.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> ChangeStatusAsync(Guid id)
-    {
-        return false;
-        //var changeStatus = await _context.Travels.FindAsync(id);
-        //changeStatus.ChangeStatus();
-        //return await _context.SaveChangesAsync() > 0;
-    }
 
     public async Task<bool> CancelTravel(Guid id)
     {
-        return false;
-        //var checkStatus = await _context.Travels.FindAsync(id);
-        //checkStatus.CancelTravel();
-        //return await _context.SaveChangesAsync() > 0;
+        var cancelTravel = await _context.Travels.FindAsync(id);
+
+        if( cancelTravel == null)
+            return false;
+
+        cancelTravel.CancelTravel();
+        _context.Travels.Update(cancelTravel);
+        return await _context.SaveChangesAsync() > 0;
     }
 }

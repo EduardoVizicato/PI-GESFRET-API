@@ -87,8 +87,20 @@ namespace TMS.Infrastructure.Repositories
 
         public async Task<IdentityResult> UpdateAsync(UserModel user)
         {
-            _logger.LogInformation($"Updating user{user.Id}");
-            return await _userManager.UpdateAsync(user);
+            var result = await _userManager.UpdateAsync(user);
+            return result;
+        }
+
+        public async Task<bool?> DeleteUser(Guid id)
+        {
+            var userToDelete = await _context.Users.FindAsync(id);
+            if(userToDelete == null)
+            {
+                _logger.LogWarning($"User with Id {id} not found for deletion.");
+                return false;
+            }
+            _context.Users.Remove(userToDelete);
+           return await _context.SaveChangesAsync() > 0;
         }
     }
 }

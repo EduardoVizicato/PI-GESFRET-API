@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Domain.Entities;
-using TMS.Domain.Entities.Enums;
 using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites
 {
-    public class Travel : BaseEntity
+    public class Travel
     {
         public Travel(
             DateTime startDate, 
@@ -17,8 +16,7 @@ namespace TMS.Domain.Entites
             AddressVO origin,
             AddressVO destination,
             decimal price,
-            LoadVO load
-            )
+            LoadVO load)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -27,7 +25,9 @@ namespace TMS.Domain.Entites
             Price = price;
             Load = load;
             CreatedAt = DateTime.Now;
+            IsCanceled = false;
         }
+        public Guid Id { get; private set; } = Guid.NewGuid();
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public AddressVO Origin { get; private set; }
@@ -36,6 +36,7 @@ namespace TMS.Domain.Entites
         public decimal Price { get; private set; }
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
+        public bool IsCanceled { get; private set; }
 
         public void UpdateTravel(
             DateTime startDate, 
@@ -55,6 +56,15 @@ namespace TMS.Domain.Entites
             Destination = destination;
             UpdatedAt = DateTime.Now;
         }
-       
+
+        public void CancelTravel()
+        {
+            if (!IsCanceled)
+            {
+                throw new Exception("Travel is already canceled.");
+            }
+
+            IsCanceled = true;
+        }
     }
 }

@@ -10,6 +10,5 @@ public interface ITravelService
     Task<Travel> GetByIdAsync(Guid id);
     Task<TravelRequest> AddAsync(TravelRequest travel);
     Task<bool?> UpdatesAsync(Guid id,TravelResponse travel);
-    Task<bool> ChangeStatusAsync(Guid id);
     Task<bool> CancelTravel(Guid id);
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Domain.Entities;
-using TMS.Domain.Entities.Enums;
 using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites.Requests.Travel

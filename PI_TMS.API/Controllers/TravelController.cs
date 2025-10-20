@@ -46,16 +46,6 @@ namespace PI_TMS.API.Controllers
             
             return Ok(data);
         }
-        
-        [HttpPost("changeTravelStatus")]
-        public async Task<IActionResult> ChangeTravelStatus(Guid id)
-        {
-            var data = await _travelService.ChangeStatusAsync(id);
-            if (data == null)
-                return BadRequest();
-            
-            return Ok(data);
-        }
 
         [HttpPut("updateTravel")]
         public async Task<IActionResult> UpdateTravel(Guid id, TravelResponse travel)

@@ -26,7 +26,7 @@ namespace PI_TMS.API.Controllers
         {
             var data = await _userService.ListAllUsers();
             return Ok(data);
-        
+
         }
 
         [HttpPost("addUser")]
@@ -35,7 +35,7 @@ namespace PI_TMS.API.Controllers
             var data = await _userService.RegisterUser(user);
             return Ok(data);
         }
-        
+
         [HttpGet("getUserbyId")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
@@ -46,12 +46,14 @@ namespace PI_TMS.API.Controllers
         [HttpPut("updateUser")]
         public async Task<IActionResult> UpdateUser(Guid id, RegisterUserResponse user)
         {
-            var data = await _userService.UpdateUser(id, user);
+            var data = await _userService.UpdateUserAsync(id, user);
+            if (data == null)
+                return BadRequest();
             return Ok(data);
-            
+
         }
 
-        [HttpDelete("desactiveUser")]
+        [HttpPost("desactiveUser")]
         public async Task<IActionResult> DesactiveUser(Guid id)
         {
             var data = await _userService.DesactiveUser(id);
@@ -73,13 +75,20 @@ namespace PI_TMS.API.Controllers
             return Ok(data);
 
         }
-        
+
         [HttpGet("getbyEmail")]
         public async Task<IActionResult> GetByEmail(string email)
         {
             var data = await _userService.GetUserByEmail(email);
             return Ok(data);
 
+        }
+
+        [HttpDelete("deleteUser")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            var data = await _userService.DeleteUser(id);
+            return Ok(data);
         }
     }
 }

@@ -33,16 +33,41 @@ namespace TMS.Application.Services.Implementation
             return desactiveUser;
         }
 
-        public async Task<IdentityResult> UpdateUser(Guid id, RegisterUserResponse request)
+        public async Task<IdentityResult> UpdateUserAsync(Guid userId, RegisterUserResponse request)
         {
-            var userToUpdate = await _userRepository.GetByIdAsync(id);
-            if (userToUpdate == null)
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
             {
-                _logger.LogError($"Update failed: User with id {id} not found.");
-                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "UserNotFound",
+                    Description = "User not found"
+                });
             }
-            
-            return await _userRepository.UpdateAsync(userToUpdate);
+
+            if (request.TaxId == null)
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "InvalidTaxId",
+                    Description = "Tax ID is required"
+                });
+            }
+
+            user.UpdateUser(request.FirstName, request.LastName, request.TaxId);
+
+            if (!string.IsNullOrEmpty(request.Email) && user.Email != request.Email)
+            {
+                var emailToken = await _userManager.GenerateChangeEmailTokenAsync(user, request.Email);
+                var emailResult = await _userManager.ChangeEmailAsync(user, request.Email, emailToken);
+
+                if (!emailResult.Succeeded)
+                {
+                    return emailResult;
+                }
+            }
+
+            return await _userManager.UpdateAsync(user);
         }
 
         public async Task<UserModel> GetUserByEmail(string email)
@@ -140,6 +165,12 @@ namespace TMS.Application.Services.Implementation
 
             // 8. Return the success result and the mapped response.
             return (identityResult, response);
+        }
+
+        public async Task<bool> DeleteUser(Guid id)
+        {
+            var deleteUser = await _userRepository.DeleteUser(id);
+            return true;
         }
     }
 }

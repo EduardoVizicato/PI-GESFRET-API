@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TMS.Infrastructure.Data;
 namespace TMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20251020135043_RemoveTravelBaseEntityInheritance")]
+    partial class RemoveTravelBaseEntityInheritance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
