@@ -55,7 +55,7 @@ public class VehicleRepository : IVehicleRepository
             throw new ArgumentException("Preencha todos os campos obrigatórios");
         }
 
-        //_context.Vehicles.Add(addVehicle);
+        _context.Vehicles.Add(addVehicle);
         await _context.SaveChangesAsync();
         return vehicle;
     }
