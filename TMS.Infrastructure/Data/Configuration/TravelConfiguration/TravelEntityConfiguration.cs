@@ -52,6 +52,10 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
                 .IsRequired()
                 .HasColumnName("Price");
 
+            builder.Property(t => t.IsCanceled)
+                .IsRequired()
+                .HasColumnName("IsCanceled");
+
         }
     }
 }
