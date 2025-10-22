@@ -2,6 +2,7 @@
 using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Travel;
 using TMS.Domain.Entites.Responses.Travel;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Repositories;
 using TMS.Infrastructure.Data;
 
@@ -14,9 +15,29 @@ public class TravelRepository : ITravelRepository
     {
         _context = context;
     }
-    public async Task<List<Travel>> GetAllAsync()
+    public async Task<List<Travel>> GetAllAsync(TravelCriteria criteria)
     {
-         return await _context.Travels.ToListAsync();
+        IQueryable<Travel> query = _context.Travels.AsQueryable();
+
+        if (criteria != null)
+        {
+            if (criteria.IsCancelled.HasValue)
+            {
+                query = query.Where(t => t.IsCanceled == criteria.IsCancelled.Value);
+            }
+
+            if (criteria.StartDate.HasValue)
+            {
+                query = query.Where(t => t.StartDate >= criteria.StartDate.Value);
+            }
+
+            if (criteria.EndDate.HasValue)
+            {
+                query = query.Where(t => t.EndDate <= criteria.EndDate.Value);
+            }
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<Travel> GetByIdAsync(Guid id)

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Windows.Markup;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
+using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Travel;
 using TMS.Domain.Entites.Responses.Travel;
 
@@ -18,13 +21,16 @@ namespace PI_TMS.API.Controllers
 
 
         [HttpGet("getAllTravels")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]TravelResultFilter? filter)
         {
-            var data = await _travelService.GetAllAsync();
-            if (data == null)
-                return BadRequest();
+            if (filter?.StartDate.HasValue == true && filter?.EndDate.HasValue == true
+            && filter.StartDate > filter.EndDate)
+            {
+                return BadRequest("StartDate must be less than or equal to EndDate.");
+            }
 
-            return Ok(data);
+            var travels = await _travelService.GetAllAsync(filter).ConfigureAwait(false);
+            return Ok(travels ?? new());
         }
 
         [HttpPost("addTravel")]
@@ -66,5 +72,7 @@ namespace PI_TMS.API.Controllers
             
             return Ok(data);
         }
+
+
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Travel;
 using TMS.Domain.Entites.Responses.Travel;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Repositories;
 
 namespace TMS.Application.Services.Implementation;
@@ -15,13 +17,21 @@ public class TravelService : ITravelService
         _travelRepository = travelRepository;   
     }
 
-    public async Task<List<Travel>> GetAllAsync()
+    public async Task<List<Travel>> GetAllAsync(TravelResultFilter filter)
     {
-        var getAllTravels = await _travelRepository.GetAllAsync();
-        if (getAllTravels == null)
-            return null;
+        if (filter?.StartDate.HasValue == true && filter?.EndDate.HasValue == true && filter?.StartDate > filter?.EndDate)
+        {
+            throw new ArgumentException("The Start Date needs to be less than the End Date");
+        }
 
-        return getAllTravels;
+        var criteria = new TravelCriteria
+        {
+            IsCancelled = filter?.IsCancelled,
+            StartDate = filter?.StartDate,
+            EndDate = filter?.EndDate
+        };
+
+        return await _travelRepository.GetAllAsync(criteria);
     }
 
     public async Task<Travel> GetByIdAsync(Guid id)
