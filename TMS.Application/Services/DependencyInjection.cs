@@ -20,6 +20,7 @@ namespace TMS.Service.Services
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEnterpriseService, EnterpriseService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<ITravelService, TravelService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
