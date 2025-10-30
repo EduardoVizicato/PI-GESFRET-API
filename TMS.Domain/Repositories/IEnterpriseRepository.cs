@@ -12,9 +12,9 @@ namespace TMS.Domain.Repositories
 {
     public interface IEnterpriseRepository
     {
-        Task<Enterprise> GetEnterpriseByIdAsync(Guid id);
-        Task<EnterpriseRequest> AddEnterpriseAsync(EnterpriseRequest enterprise);
-        Task<bool> UpdateEnterpriseAsync(Guid id, EnterpriseResponse enterprise);
-        Task<bool?> DesactiveEnterpriseeAsync(Guid id);
+        Task<Enterprise> GetByIdAsync(Guid id);
+        Task<EnterpriseRequest> AddAsync(EnterpriseRequest enterprise);
+        Task<bool> UpdatesAsync(Guid id, EnterpriseResponse enterprise);
+        Task<bool?> DesactiveAsync(Guid id);
     }
 }

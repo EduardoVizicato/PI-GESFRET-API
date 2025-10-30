@@ -10,9 +10,9 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Infrastructure.Data.Configuration.EnterpriseConfiguration
 {
-    internal class EnterpriseEntityConfiguration : IEntityTypeConfiguration<Enteprise>
+    internal class EnterpriseEntityConfiguration : IEntityTypeConfiguration<Enterprise>
     {
-        public void Configure(EntityTypeBuilder<Enteprise> builder)
+        public void Configure(EntityTypeBuilder<Enterprise> builder)
         {
             builder.HasKey(t => t.Id);
 

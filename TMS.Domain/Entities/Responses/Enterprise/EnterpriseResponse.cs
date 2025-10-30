@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entities.Responses.Enterprise
 {
@@ -10,7 +11,7 @@ namespace TMS.Domain.Entities.Responses.Enterprise
     {
         public string Name { get; set; }    
         public string Email { get; set; }
-        public string TaxId { get; set; }
+        public TaxIdVO TaxId { get; set; }
         public bool IsActive { get; set; }  
     }
 }
