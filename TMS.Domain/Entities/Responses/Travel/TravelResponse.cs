@@ -18,5 +18,6 @@ namespace TMS.Domain.Entites.Responses.Travel
         public decimal Price { get; private set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; }
+
     }
 }
