@@ -25,16 +25,16 @@ namespace TMS.Infrastructure.Repositories
             return await _context.Enterprises.FindAsync(id);
         }
 
-        public async Task<EnterpriseRequest> AddAsync(EnterpriseRequest enterprise)
+        public async Task<EnterpriseRequest> AddAsync(Enterprise enterprise)
         {
-            var addEnterprise = new Enterprise(
+            var addEnterprise = new EnterpriseRequest(
                 enterprise.Name,
                 enterprise.Email,
                 enterprise.TaxId
                 );
-            _context.Enterprises.Add(addEnterprise);
+            _context.Enterprises.Add(enterprise);
             await _context.SaveChangesAsync();
-            return enterprise;
+            return addEnterprise;
         }
 
 

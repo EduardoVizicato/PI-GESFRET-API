@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PI_TMS.API.Models.ViewModel;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entities;
 using TMS.Domain.Entities.Requests.Enterprise;
@@ -24,10 +25,17 @@ namespace PI_TMS.API.Controllers
             return Ok(data);
         }
         [HttpPost("addEnterprise")]
-        public async Task<IActionResult> AddEnterprise(EnterpriseRequest enterprise)
+        public async Task<IActionResult> AddEnterprise(Guid Id, EnterpriseRequest enterprise)
         {
             var data = await _service.AddEnterpriseAsync(enterprise);
-            return Ok();
+            var response = new EnterpriseViewModel(
+                Id = data.Id,
+                data.Name,
+                data.Email,
+                data.TaxId
+                );
+
+            return CreatedAtAction(nameof(GetEnterpriseById), new { id = Id }, response);
         }
         [HttpPut("updateEnterprise")]
         public async Task<IActionResult> UpdateEnterprise(Guid id, EnterpriseResponse enterprise)
