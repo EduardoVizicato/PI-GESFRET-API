@@ -59,7 +59,7 @@ namespace TMS.Domain.Entites
 
         public void CancelTravel()
         {
-            if (!IsCanceled)
+            if (IsCanceled)
             {
                 throw new Exception("Travel is already canceled.");
             }
