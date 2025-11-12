@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using PI_TMS.API.Models.DTOs;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.User;
 
@@ -11,9 +13,11 @@ namespace PI_TMS.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILoginService _loginService;
-        public AuthController(ILoginService loginService)
+        private readonly UserManager<UserModel> _userManager;
+        public AuthController(ILoginService loginService, UserManager<UserModel> userManager)
         {
             _loginService = loginService;
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
@@ -22,8 +26,14 @@ namespace PI_TMS.API.Controllers
             var token = await _loginService.LoginAsync(request.Email, request.Password);
             if (token == null)
                 return Unauthorized("Invalid credentials");
-            
+
+                
             return Ok(new { Token = token });
+        }
+
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthDTO userForAuthDTO)
+        {
+
         }
     }
 }
