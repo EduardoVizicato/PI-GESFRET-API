@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Threading.Tasks;
 using TMS.Application.Services.Interfaces;
-using TMS.Domain.Entites;
 using TMS.Domain.Entities;
 using TMS.Domain.Entities.Requests.Enterprise;
 using TMS.Domain.Entities.Responses.Enterprise;
 using TMS.Domain.Repositories;
-using TMS.Infrastructure.Repositories;
 
 namespace TMS.Application.Services.Implementation
 {
@@ -27,9 +26,15 @@ namespace TMS.Application.Services.Implementation
         }
         public async Task<EnterpriseRequest> AddEnterpriseAsync(EnterpriseRequest enterprise)
         {
-            var addEnterprise = await _enterpriseRepository.AddAsync(enterprise);
+            var entity = new Enterprise(enterprise.Name, enterprise.Email, enterprise.TaxId)
+            {
+            };
 
-            return addEnterprise;
+            var created = await _enterpriseRepository.AddAsync(entity);
+
+            var result = new EnterpriseRequest(created.Id, created.Name, created.Email, created.TaxId);
+
+            return result;
         }
 
         public async Task<bool> UpdateEnterpriseAsync(Guid id, EnterpriseResponse enterprise)

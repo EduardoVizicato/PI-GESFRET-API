@@ -14,12 +14,12 @@ namespace TMS.Domain.Entities
             IsActive = true;
         }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public TaxIdVO TaxId { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public bool IsActive { get; set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public TaxIdVO TaxId { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime? UpdatedAt { get; private set; }
+        public bool IsActive { get; private set; }
 
         public void UpdateEnterprise(string name, string email, TaxIdVO taxId)
         {
