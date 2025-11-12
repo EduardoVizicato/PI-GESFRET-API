@@ -9,15 +9,18 @@ using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Entites
 {
+    
     public class Travel
     {
+        private Travel() { }
         public Travel(
             DateTime startDate, 
             DateTime endDate,
             AddressVO origin,
             AddressVO destination,
             decimal price,
-            LoadVO load)
+            LoadVO load,
+            Guid vehicleId)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -25,9 +28,9 @@ namespace TMS.Domain.Entites
             Destination = destination;
             Price = price;
             Load = load;
-            Truck = new Collection<Vehicle>();
             CreatedAt = DateTime.Now;
             IsCanceled = false;
+            VehicleId = vehicleId;
         }
         public Guid Id { get; private set; } = Guid.NewGuid();
         public DateTime StartDate { get; private set; }
@@ -36,10 +39,11 @@ namespace TMS.Domain.Entites
         public AddressVO Destination { get; private set; }
         public LoadVO Load { get; private set; }
         public decimal Price { get; private set; }
+        public Guid VehicleId { get; private set; }
+        public Vehicle Vehicle { get; private set; }
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsCanceled { get; private set; }
-        public ICollection<Vehicle> Truck { get; set; }
 
         public void UpdateTravel(
             DateTime startDate, 

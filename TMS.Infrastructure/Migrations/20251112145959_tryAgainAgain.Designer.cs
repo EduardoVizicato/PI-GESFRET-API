@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TMS.Infrastructure.Data;
 namespace TMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20251112145959_tryAgainAgain")]
+    partial class tryAgainAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +173,7 @@ namespace TMS.Infrastructure.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("EndData");
+                        .HasColumnName("EndDate");
 
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("bit")
@@ -201,9 +204,14 @@ namespace TMS.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("VehicleId");
 
+                    b.Property<Guid>("VehicleId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("VehicleId");
+
+                    b.HasIndex("VehicleId1");
 
                     b.ToTable("Travels");
                 });
@@ -431,9 +439,15 @@ namespace TMS.Infrastructure.Migrations
 
             modelBuilder.Entity("TMS.Domain.Entites.Travel", b =>
                 {
-                    b.HasOne("TMS.Domain.Entites.Vehicle", "Vehicle")
+                    b.HasOne("TMS.Domain.Entites.Vehicle", null)
                         .WithMany("Travels")
                         .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TMS.Domain.Entites.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -48,6 +48,10 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
                 value => JsonSerializer.Deserialize<LoadVO>(value, (JsonSerializerOptions)null))
              .HasColumnName("Load");
 
+            builder.Property(t => t.VehicleId)
+                .IsRequired()
+                .HasColumnName("VehicleId");
+
             builder.Property(t => t.Price)
                 .IsRequired()
                 .HasColumnName("Price");

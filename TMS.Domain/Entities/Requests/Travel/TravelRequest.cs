@@ -16,5 +16,6 @@ namespace TMS.Domain.Entites.Requests.Travel
         public AddressVO Destination { get; set; }
         public LoadVO Load { get; set; }
         public decimal Price { get; set; }
+        public Guid VehicleId { get; set; }
     }
 }

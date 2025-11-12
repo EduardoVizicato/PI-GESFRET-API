@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Domain.Entities.Common.Enums;
-using TMS.Domain.ValueObjects;
 
-namespace TMS.Domain.Entites.Responses.Vehicle
+namespace TMS.Domain.Entities.Responses.Vehicle
 {
-    public class VehicleResponse
+    public class VehicleSummaryResponse
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        public VehicleRegistrationPlateVO VehicleRegistrationPlate { get; set; }
+        public string RegistrationPlate { get; set; } // exponha string, não o VO
         public VehicleType TruckType { get; set; }
         public RodadoEnum? WheelType { get; set; }
         public CarroceriaEnum? BodyType { get; set; }
-
     }
 }

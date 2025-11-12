@@ -28,6 +28,7 @@ namespace TMS.Infrastructure.Repositories
         public async Task<EnterpriseRequest> AddAsync(Enterprise enterprise)
         {
             var addEnterprise = new EnterpriseRequest(
+                enterprise.Id,
                 enterprise.Name,
                 enterprise.Email,
                 enterprise.TaxId

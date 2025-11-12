@@ -37,6 +37,15 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
             builder.Property(v => v.BodyType)
                 .IsRequired()
                 .HasColumnName("Carroceria");
+
+            builder.Navigation(t => t.Travels)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.HasMany(v => v.Travels)
+               .WithOne(t => t.Vehicle)          
+               .HasForeignKey(t => t.VehicleId)  
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
