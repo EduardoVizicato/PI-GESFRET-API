@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace TMS.Domain.Entites
             Destination = destination;
             Price = price;
             Load = load;
+            Truck = new Collection<Vehicle>();
             CreatedAt = DateTime.Now;
             IsCanceled = false;
         }
@@ -37,6 +39,7 @@ namespace TMS.Domain.Entites
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsCanceled { get; private set; }
+        public ICollection<Vehicle> Truck { get; set; }
 
         public void UpdateTravel(
             DateTime startDate, 

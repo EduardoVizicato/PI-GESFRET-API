@@ -31,6 +31,12 @@ namespace TMS.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDataContext).Assembly);
+
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.Travel)
+                .WithMany(t => t.Truck)
+                .HasForeignKey(v => v.TravelId);
+
         }
     }
 
