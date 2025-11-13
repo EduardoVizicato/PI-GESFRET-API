@@ -24,19 +24,15 @@ namespace PI_TMS.API.Controllers
             var data = await _service.GetEnterpriseByIdAsync(id);
             return Ok(data);
         }
+
         [HttpPost("addEnterprise")]
-        public async Task<IActionResult> AddEnterprise(Guid Id, EnterpriseRequest enterprise)
+        public async Task<IActionResult> AddEnterprise([FromBody]EnterpriseRequest enterprise)
         {
             var data = await _service.AddEnterpriseAsync(enterprise);
-            var response = new EnterpriseViewModel(
-                Id = data.Id,
-                data.Name,
-                data.Email,
-                data.TaxId
-                );
 
-            return CreatedAtAction(nameof(GetEnterpriseById), new { id = Id }, response);
+            return CreatedAtAction(nameof(GetEnterpriseById), new {id = data}, data);
         }
+
         [HttpPut("updateEnterprise")]
         public async Task<IActionResult> UpdateEnterprise(Guid id, EnterpriseResponse enterprise)
         {

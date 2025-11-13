@@ -10,11 +10,23 @@ namespace TMS.Domain.Entites.Requests.Travel
 {
     public class TravelRequest
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public AddressVO Origin { get; set; }
-        public AddressVO Destination { get; set; }
-        public LoadVO Load { get; set; }
-        public decimal Price { get; set; }
+        public TravelRequest(DateTime startDate, DateTime endDate, AddressVO origin, AddressVO destination, LoadVO load, decimal price, Guid truckId)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
+            Origin = origin;
+            Destination = destination;
+            Load = load;
+            Price = price;
+            TruckId = truckId;
+        }
+
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
+        public AddressVO Origin { get; private set; }
+        public AddressVO Destination { get; private set; }
+        public LoadVO Load { get; private set; }
+        public decimal Price { get; private set; }
+        public Guid TruckId { get; private set; }
     }
 }

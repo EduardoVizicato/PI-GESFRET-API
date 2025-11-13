@@ -24,17 +24,15 @@ namespace TMS.Application.Services.Implementation
 
             return EnterpriseById;
         }
-        public async Task<EnterpriseRequest> AddEnterpriseAsync(EnterpriseRequest enterprise)
+        public async Task<Guid> AddEnterpriseAsync(EnterpriseRequest enterprise)
         {
             var entity = new Enterprise(enterprise.Name, enterprise.Email, enterprise.TaxId)
             {
             };
 
-            var created = await _enterpriseRepository.AddAsync(entity);
+            await _enterpriseRepository.AddAsync(entity);
 
-            var result = new EnterpriseRequest(created.Id, created.Name, created.Email, created.TaxId);
-
-            return result;
+            return entity.Id;
         }
 
         public async Task<bool> UpdateEnterpriseAsync(Guid id, EnterpriseResponse enterprise)

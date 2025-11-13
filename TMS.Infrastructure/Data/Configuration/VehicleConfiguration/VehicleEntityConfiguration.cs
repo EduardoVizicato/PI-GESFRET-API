@@ -20,7 +20,7 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
                 .HasMaxLength(50)
                 .HasColumnName("Name")
                 .IsRequired();
-            
+
             builder.Property(v => v.VehicleRegistrationPlate)
                 .HasColumnName("VehicleRegistrationPlate")
                 .IsRequired()
@@ -37,6 +37,11 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
             builder.Property(v => v.BodyType)
                 .IsRequired()
                 .HasColumnName("Carroceria");
+
+            builder.HasMany(v => v.Travels)
+                .WithOne(t => t.Truck)
+                .HasForeignKey(t => t.TruckId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

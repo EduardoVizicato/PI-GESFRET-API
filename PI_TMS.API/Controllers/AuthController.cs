@@ -31,9 +31,9 @@ namespace PI_TMS.API.Controllers
             return Ok(new { Token = token });
         }
 
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthDTO userForAuthDTO)
-        {
+        //public async Task<IActionResult> Authenticate([FromBody] UserForAuthDTO userForAuthDTO)
+        //{
 
-        }
+        //}
     }
 }

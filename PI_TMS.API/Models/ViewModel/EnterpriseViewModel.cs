@@ -4,9 +4,8 @@ namespace PI_TMS.API.Models.ViewModel
 {
     public class EnterpriseViewModel
     {
-        public EnterpriseViewModel(Guid id, string name, string email, TaxIdVO taxId)
+        public EnterpriseViewModel(string name, string email, TaxIdVO taxId)
         {
-            Id = id;
             Name = name;
             Email = email;
             TaxId = taxId;
