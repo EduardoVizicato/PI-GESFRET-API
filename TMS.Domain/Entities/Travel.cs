@@ -18,7 +18,8 @@ namespace TMS.Domain.Entites
             AddressVO destination,
             decimal price,
             LoadVO load,
-            Guid truckId)
+            Guid truckId,
+            Guid enterpriseId)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -29,6 +30,7 @@ namespace TMS.Domain.Entites
             CreatedAt = DateTime.Now;
             IsCanceled = false;
             TruckId = truckId;
+            EnterpriseId = enterpriseId;
 
         }
         public Guid Id { get; private set; } = Guid.NewGuid();
@@ -41,8 +43,12 @@ namespace TMS.Domain.Entites
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsCanceled { get; private set; }
+
         public Guid TruckId {  get; private set; }
         public Vehicle Truck { get; set; }
+
+        public Guid EnterpriseId { get; set; }
+        public Enterprise Enterprise { get; set; }
 
         public void UpdateTravel(
             DateTime startDate, 

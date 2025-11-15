@@ -15,5 +15,6 @@ namespace TMS.Domain.Entites.Requests.Vehicle
         public VehicleType TruckType { get; set; }
         public RodadoEnum? WheelType { get; set; }
         public CarroceriaEnum? BodyType { get; set; }
+        public Guid EnterpriseId { get; set; }
     }
 }

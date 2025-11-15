@@ -140,12 +140,14 @@ namespace TMS.Application.Services.Implementation
             var newUser = new UserModel(
                 request.FirstName,
                 request.LastName,
-                request.TaxId
+                request.TaxId, 
+                request.EnterpriseId
             );
             
             newUser.Email = request.Email;
             newUser.UserName = request.Email; 
             newUser.PhoneNumber = request.PhoneNumber;
+            newUser.EnterpriseId = request.EnterpriseId;
 
             var identityResult = await _userRepository.AddAsync(newUser, request.Password);
 
@@ -160,7 +162,8 @@ namespace TMS.Application.Services.Implementation
                 LastName = newUser.LastName,
                 Email = newUser.Email,
                 TaxId = newUser.TaxId,
-                PhoneNumber = newUser.PhoneNumber,
+                PhoneNumber = newUser.PhoneNumber
+
             };
 
             // 8. Return the success result and the mapped response.

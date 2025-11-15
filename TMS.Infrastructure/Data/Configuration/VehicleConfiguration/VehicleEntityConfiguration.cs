@@ -42,6 +42,17 @@ namespace TMS.Infrastructure.Data.Configuration.VehicleConfiguration
                 .WithOne(t => t.Truck)
                 .HasForeignKey(t => t.TruckId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+
+
+            builder.Property(t => t.EnterpriseId)
+             .HasColumnName("EnterpriseId")
+             .IsRequired();
+
+            builder.HasOne(t => t.Enterprise)
+                .WithMany(v => v.Vehicles)
+                .HasForeignKey(t => t.EnterpriseId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

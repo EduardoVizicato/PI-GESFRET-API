@@ -35,6 +35,15 @@ namespace TMS.Infrastructure.Data.Configuration.UserConfiguration
                 .IsRequired()
                 .HasColumnName("IsActive")
                 .HasColumnType("bit");
+
+            builder.Property(t => t.EnterpriseId)
+                .HasColumnName("EnterpriseId")
+                .IsRequired();
+
+            builder.HasOne(t => t.Enterprise)
+                .WithMany(v => v.Users)
+                .HasForeignKey(t => t.EnterpriseId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

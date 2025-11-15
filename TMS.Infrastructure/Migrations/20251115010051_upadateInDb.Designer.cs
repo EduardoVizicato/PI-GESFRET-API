@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TMS.Infrastructure.Data;
 namespace TMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20251115010051_upadateInDb")]
+    partial class upadateInDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,10 +175,6 @@ namespace TMS.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("EndData");
 
-                    b.Property<Guid>("EnterpriseId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("EnterpriseId");
-
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("bit")
                         .HasColumnName("IsCanceled");
@@ -207,8 +206,6 @@ namespace TMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnterpriseId");
-
                     b.HasIndex("TruckId");
 
                     b.ToTable("Travels");
@@ -227,9 +224,8 @@ namespace TMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EnterpriseId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("EnterpriseId");
+                    b.Property<Guid?>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -321,10 +317,6 @@ namespace TMS.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("EnterpriseId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("EnterpriseId");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -382,8 +374,6 @@ namespace TMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EnterpriseId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -449,43 +439,20 @@ namespace TMS.Infrastructure.Migrations
 
             modelBuilder.Entity("TMS.Domain.Entites.Travel", b =>
                 {
-                    b.HasOne("TMS.Domain.Entities.Enterprise", "Enterprise")
-                        .WithMany("Travels")
-                        .HasForeignKey("EnterpriseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("TMS.Domain.Entites.Vehicle", "Truck")
                         .WithMany("Travels")
                         .HasForeignKey("TruckId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Enterprise");
-
                     b.Navigation("Truck");
                 });
 
             modelBuilder.Entity("TMS.Domain.Entites.Vehicle", b =>
                 {
-                    b.HasOne("TMS.Domain.Entities.Enterprise", "Enterprise")
+                    b.HasOne("TMS.Domain.Entities.Enterprise", null)
                         .WithMany("Vehicles")
-                        .HasForeignKey("EnterpriseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Enterprise");
-                });
-
-            modelBuilder.Entity("UserModel", b =>
-                {
-                    b.HasOne("TMS.Domain.Entities.Enterprise", "Enterprise")
-                        .WithMany("Users")
-                        .HasForeignKey("EnterpriseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Enterprise");
+                        .HasForeignKey("EnterpriseId");
                 });
 
             modelBuilder.Entity("TMS.Domain.Entites.Vehicle", b =>
@@ -495,10 +462,6 @@ namespace TMS.Infrastructure.Migrations
 
             modelBuilder.Entity("TMS.Domain.Entities.Enterprise", b =>
                 {
-                    b.Navigation("Travels");
-
-                    b.Navigation("Users");
-
                     b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
