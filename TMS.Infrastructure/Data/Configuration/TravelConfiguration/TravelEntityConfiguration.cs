@@ -56,6 +56,7 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
                 .IsRequired()
                 .HasColumnName("IsCanceled");
 
+
             builder.Property(t => t.TruckId)
                 .HasColumnName("TruckId")
                 .IsRequired();
@@ -63,6 +64,15 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
             builder.HasOne(t => t.Truck)
                 .WithMany(v => v.Travels)
                 .HasForeignKey(t => t.TruckId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(t => t.EnterpriseId)
+                .HasColumnName("EnterpriseId")
+                .IsRequired();
+
+            builder.HasOne(t => t.Enterprise)
+                .WithMany(v => v.Travels)
+                .HasForeignKey(t => t.EnterpriseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
         }

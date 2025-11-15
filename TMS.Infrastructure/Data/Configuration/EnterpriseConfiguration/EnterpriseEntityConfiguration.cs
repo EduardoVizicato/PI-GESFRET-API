@@ -41,6 +41,23 @@ namespace TMS.Infrastructure.Data.Configuration.EnterpriseConfiguration
             builder.Property(t => t.CreatedAt)
                 .HasColumnName("DateCreate")
                 .IsRequired();
+
+
+
+            builder.HasMany(v => v.Vehicles)
+                .WithOne(x => x.Enterprise)
+                .HasForeignKey(t => t.EnterpriseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(v => v.Users)
+                .WithOne(x => x.Enterprise)
+                .HasForeignKey(t => t.EnterpriseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(v => v.Travels)
+                .WithOne(x => x.Enterprise)
+                .HasForeignKey(t => t.EnterpriseId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

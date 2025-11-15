@@ -10,7 +10,7 @@ namespace TMS.Domain.Entites.Requests.User
 {
     public class RegisterUserRequest
     {
-        public RegisterUserRequest(string firstName, string lastName, string email, string password, string phoneNumber, TaxIdVO taxId)
+        public RegisterUserRequest(string firstName, string lastName, string email, string password, string phoneNumber, TaxIdVO taxId, Guid enterpriseId)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -18,6 +18,7 @@ namespace TMS.Domain.Entites.Requests.User
             Password = password;
             PhoneNumber = phoneNumber;
             TaxId = taxId;
+            EnterpriseId = enterpriseId;
         }
 
         [Required]
@@ -39,5 +40,6 @@ namespace TMS.Domain.Entites.Requests.User
 
         [Required]
         public TaxIdVO TaxId { get; private set; }
+        public Guid EnterpriseId { get; set; }
     }
 }

@@ -46,7 +46,8 @@ public class VehicleRepository : IVehicleRepository
             vehicle.VehicleRegistrationPlate,
             vehicle.TruckType,
             vehicle.WheelType ?? RodadoEnum.Null,
-            vehicle.BodyType ?? CarroceriaEnum.Null
+            vehicle.BodyType ?? CarroceriaEnum.Null,
+            vehicle.EnterpriseId
         );
 
         if (string.IsNullOrWhiteSpace(addVehicle.Name) || addVehicle.VehicleRegistrationPlate == null)

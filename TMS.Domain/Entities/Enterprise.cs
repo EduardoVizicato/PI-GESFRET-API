@@ -20,7 +20,10 @@ namespace TMS.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
         public bool IsActive { get; private set; }
+
         public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<UserModel> Users { get; set; }
+        public ICollection<Travel> Travels { get; set; }
 
         public void UpdateEnterprise(string name, string email, TaxIdVO taxId)
         {
