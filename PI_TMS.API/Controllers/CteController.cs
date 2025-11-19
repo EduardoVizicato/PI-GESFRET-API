@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TMS.Domain.Entities.Requests.;
+using TMS.Domain.Entities.Requests.Cte;
 
 namespace PI_TMS.API.Controllers
 {
@@ -6,35 +8,16 @@ namespace PI_TMS.API.Controllers
     [ApiController]
     public class CteController : ControllerBase 
     {
-        private readonly IWebHostEnvironment _env;
-
-        public CteController(IWebHostEnvironment env)
+        
+       
+        [HttpPost]
+        public IActionResult PostCte([FromForm] CteRequest cteRequest)
         {
-            _env = env;
-        }
-
-        [HttpGet]
-        public HttpResponseMessage GetCte()
-        {
-            HttpResponseMessage result = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-            string pdfLocation = Path.Combine(_env.ContentRootPath, "Storage", "CTE-Sample.pdf");
-            var stream = new MemoryStream(System.IO.File.ReadAllBytes(pdfLocation));
-            stream.Position = 0;
-            if (stream != null)
-            {
-                result.Content = new StreamContent(stream);
-                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
-                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("inline")
-                {
-                    FileName = "CTE-Sample.pdf"
-                };
-                result.StatusCode = System.Net.HttpStatusCode.OK;
-            }
-            else
-            {
-                result.StatusCode = System.Net.HttpStatusCode.NotFound;
-            }
-            return result;
+            var filePath = Path.Combine("Storage", cteRequest.File.FileName);
+            //var cteData = new Cte(cteRequest.Name, cteRequest.Description, filePath);
+            // Process the received CTe data (cteData)
+            // For demonstration, we'll just return a success message
+            return Ok(new { Message = "CTe data received successfully" });
         }
     }
 }
