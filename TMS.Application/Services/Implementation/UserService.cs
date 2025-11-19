@@ -13,6 +13,8 @@ using TMS.Domain.Entities;
 using TMS.Domain.Repositories;
 using TMS.Domain.ValueObjects;
 using Microsoft.CodeAnalysis;
+using TMS.Application.Models;
+using TMS.Domain.Entities.Common.Criteria;
 
 namespace TMS.Application.Services.Implementation
 {
@@ -120,9 +122,13 @@ namespace TMS.Application.Services.Implementation
             }
         }
 
-        public Task<List<UserModel>> ListAllUsers()
+        public Task<List<UserModel>> ListAllUsers(UserResultFilter filter)
         {
-            var listAllUsers = _userRepository.GetAllAsync();
+            var criteria = new UserCriteria
+            {
+                EnterpriseId = filter.EnterpriseId
+            };
+            var listAllUsers = _userRepository.GetAllAsync(criteria);
             return listAllUsers;
         }
 

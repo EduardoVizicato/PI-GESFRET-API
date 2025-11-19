@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Vehicle;
 using TMS.Domain.Entites.Responses.Vehicle;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Repositories;
 
 namespace TMS.Application.Services.Implementation
@@ -40,9 +42,13 @@ namespace TMS.Application.Services.Implementation
             return getVehicleById;
         }
 
-        public Task<List<Vehicle>> ListAllVehiclesAsync()
+        public Task<List<Vehicle>> ListAllVehiclesAsync(VehicleResultFilter filter)
         {
-            return _vehcileRepository.GetAllVehiclesAsync();
+            var criteria = new VehicleCriteria
+            {
+                EnterpriseId = filter.EnterpriseId
+            };
+            return _vehcileRepository.GetAllVehiclesAsync(criteria);
         }
 
         public async Task<bool?> UpdateVehicleAsync(Guid id, VehicleResponse vehicle)

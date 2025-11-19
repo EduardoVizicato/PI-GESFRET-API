@@ -1,14 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Repositories;
 using TMS.Domain.ValueObjects;
 using TMS.Infrastructure.Data;
@@ -42,10 +44,20 @@ namespace TMS.Infrastructure.Repositories
             return await _context.Users.Where(x => x.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<UserModel>> GetAllAsync()
+        public async Task<List<UserModel>> GetAllAsync(UserCriteria criteria)
         {
             _logger.LogInformation("Carregando todos os usuários");
-            return await _context.Users.ToListAsync();
+            IQueryable<UserModel> query = _context.Users.AsQueryable();
+
+            if (criteria != null)
+            {
+                if (criteria.EnterpriseId != Guid.Empty)
+                {
+                    query = query.Where(t => t.EnterpriseId == criteria.EnterpriseId);
+                }
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<List<UserModel>> GetAllDesactivedUsers()

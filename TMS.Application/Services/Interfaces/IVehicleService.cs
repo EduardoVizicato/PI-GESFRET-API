@@ -7,12 +7,13 @@ using TMS.Domain.Entites.Requests.Vehicle;
 using TMS.Domain.Entites.Responses.Vehicle;
 using TMS.Domain.Entites;
 using TMS.Domain.Entities;
+using TMS.Application.Models;
 
 namespace TMS.Application.Services.Interfaces
 {
     public interface IVehicleService
     {
-        Task<List<Vehicle>> ListAllVehiclesAsync();
+        Task<List<Vehicle>> ListAllVehiclesAsync(VehicleResultFilter filter);
         Task<Vehicle> GetVehicleByIdAsync(Guid id);
         Task<VehicleRequest> RegisterVehicleAsync(VehicleRequest vehicle);
         Task<bool?> UpdateVehicleAsync(Guid id, VehicleResponse vehicle);

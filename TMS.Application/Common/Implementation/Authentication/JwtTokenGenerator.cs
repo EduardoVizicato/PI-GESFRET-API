@@ -30,6 +30,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.GivenName, user.FirstName),
             new Claim(ClaimTypes.Surname, user.LastName),
+            //new Claim(ClaimTypes.Authentication, user.IsActive)
         };
         
         var roles = await _userManager.GetRolesAsync(user);

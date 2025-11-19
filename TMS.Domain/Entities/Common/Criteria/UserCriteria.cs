@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TMS.Domain.Entities.Common.Criteria
 {
-    public class TravelCriteria
+    public class UserCriteria
     {
-        public bool? IsCancelled { get; set; }
         public Guid EnterpriseId { get; set; }
     }
 }

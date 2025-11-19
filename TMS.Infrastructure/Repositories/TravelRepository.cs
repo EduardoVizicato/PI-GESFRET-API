@@ -25,15 +25,9 @@ public class TravelRepository : ITravelRepository
             {
                 query = query.Where(t => t.IsCanceled == criteria.IsCancelled.Value);
             }
-
-            if (criteria.StartDate.HasValue)
+            if (criteria.EnterpriseId != Guid.Empty)
             {
-                query = query.Where(t => t.StartDate >= criteria.StartDate.Value);
-            }
-
-            if (criteria.EndDate.HasValue)
-            {
-                query = query.Where(t => t.EndDate <= criteria.EndDate.Value);
+                query = query.Where(t => t.EnterpriseId == criteria.EnterpriseId);
             }
         }
 

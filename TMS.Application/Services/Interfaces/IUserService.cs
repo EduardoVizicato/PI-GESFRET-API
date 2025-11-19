@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using TMS.Application.Models;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
@@ -16,7 +17,7 @@ namespace TMS.Application.Services.Interfaces
         Task<(IdentityResult, RegisterUserResponse)> RegisterUser(RegisterUserRequest request);
         Task<bool?> DesactiveUser(Guid id);
         Task<IdentityResult> UpdateUserAsync(Guid userId, RegisterUserResponse request);
-        Task<List<UserModel>> ListAllUsers();
+        Task<List<UserModel>> ListAllUsers(UserResultFilter filter);
         Task<UserModel> GetUserById(Guid id);
         Task<UserModel> GetUserByEmail(string email);
         Task<List<UserModel>> ListAllActivedUsers();
