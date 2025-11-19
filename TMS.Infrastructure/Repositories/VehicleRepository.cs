@@ -4,6 +4,7 @@ using TMS.Domain.Entites;
 using TMS.Domain.Entites.Requests.Vehicle;
 using TMS.Domain.Entites.Responses.Vehicle;
 using TMS.Domain.Entities;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Entities.Common.Enums;
 using TMS.Domain.Repositories;
 using TMS.Infrastructure.Data;
@@ -21,10 +22,20 @@ public class VehicleRepository : IVehicleRepository
         _logger = logger;
     }
 
-    public async Task<List<Vehicle>> GetAllVehiclesAsync()
+    public async Task<List<Vehicle>> GetAllVehiclesAsync(VehicleCriteria criteria)
     {
         _logger.LogInformation($"Carregando todos os veículos");
-        return await _context.Vehicles.ToListAsync();
+        IQueryable<Vehicle> query = _context.Vehicles.AsQueryable();
+
+        if (criteria != null)
+        {
+            if (criteria.EnterpriseId != Guid.Empty)
+            {
+                query = query.Where(t => t.EnterpriseId == criteria.EnterpriseId);
+            }
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<Vehicle> GetVehicleByIdAsync(Guid id)

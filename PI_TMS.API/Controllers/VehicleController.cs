@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PI_TMS.API.Models.ViewModel;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.Vehicle;
 using TMS.Domain.Entites.Responses.Vehicle;
@@ -22,9 +23,9 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpGet("getAllVehicles")]
-        public async Task<IActionResult> GetAllVehicles()
+        public async Task<IActionResult> GetAllVehicles([FromQuery] VehicleResultFilter filter)
         {
-            var data = await _service.ListAllVehiclesAsync();
+            var data = await _service.ListAllVehiclesAsync(filter);
             return Ok(data);
         }
 

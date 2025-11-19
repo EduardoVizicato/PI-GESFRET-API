@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMS.Domain.Entities.Common.Criteria
+namespace TMS.Application.Models
 {
-    public class TravelCriteria
+    public class UserResultFilter
     {
-        public bool? IsCancelled { get; set; }
         public Guid EnterpriseId { get; set; }
     }
 }

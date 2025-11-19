@@ -23,11 +23,6 @@ namespace PI_TMS.API.Controllers
         [HttpGet("getAllTravels")]
         public async Task<IActionResult> GetAll([FromQuery]TravelResultFilter? filter)
         {
-            if (filter?.StartDate.HasValue == true && filter?.EndDate.HasValue == true
-            && filter.StartDate > filter.EndDate)
-            {
-                return BadRequest("StartDate must be less than or equal to EndDate.");
-            }
 
             var travels = await _travelService.GetAllAsync(filter).ConfigureAwait(false);
             return Ok(travels ?? new());

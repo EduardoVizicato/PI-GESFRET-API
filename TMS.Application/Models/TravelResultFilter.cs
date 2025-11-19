@@ -9,7 +9,6 @@ namespace TMS.Application.Models
     public class TravelResultFilter
     {
         public bool? IsCancelled { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public Guid EnterpriseId { get; set; }
     }
 }
