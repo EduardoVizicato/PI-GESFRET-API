@@ -8,15 +8,16 @@ namespace PI_TMS.API.Controllers
     [ApiController]
     public class CteController : ControllerBase 
     {
-        
-       
         [HttpPost]
         public IActionResult PostCte([FromForm] CteRequest cteRequest)
         {
             var filePath = Path.Combine("Storage", cteRequest.File.FileName);
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            cteRequest.File.CopyTo(fileStream);
+
             //var cteData = new Cte(cteRequest.Name, cteRequest.Description, filePath);
-            // Process the received CTe data (cteData)
-            // For demonstration, we'll just return a success message
+
+
             return Ok(new { Message = "CTe data received successfully" });
         }
     }
