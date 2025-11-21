@@ -9,6 +9,7 @@ using TMS.Infrastructure.Data;
 using TMS.Infrastructure.OptionsSetup;
 using TMS.Service.Services;
 using System.Text.Json.Serialization;
+using TMS.Application.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -49,6 +50,10 @@ var builder = WebApplication.CreateBuilder(args);
         .AddEntityFrameworkStores<ApplicationDataContext>()
         .AddDefaultTokenProviders();
 
+    builder.Services.Configure<GmailOptions>(
+        builder.Configuration.GetSection(GmailOptions.GmailOptionsKey)
+        );
+
     builder.Services.AddAuthentication("Bearer")
         .AddJwtBearer("Bearer", options =>
         {
@@ -66,6 +71,7 @@ var builder = WebApplication.CreateBuilder(args);
                     Encoding.UTF8.GetBytes(jwtSettings["Key"]))
             };
         });
+    
 }
 
 var app = builder.Build();

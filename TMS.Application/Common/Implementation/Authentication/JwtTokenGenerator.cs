@@ -26,15 +26,17 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     {
         var userClaims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier,  user.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.GivenName, user.FirstName),
             new Claim(ClaimTypes.Surname, user.LastName),
+            new Claim("IsActive", user.IsActive.ToString(), ClaimValueTypes.Boolean),
+            new Claim("Enterprise", user.EnterpriseId.ToString())
         };
-        
+
         var roles = await _userManager.GetRolesAsync(user);
         userClaims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-        
+
         var credentials = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha256);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -43,7 +45,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             SigningCredentials = credentials,
             Issuer = _configuration["Jwt:Issuer"],
         };
-        
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);

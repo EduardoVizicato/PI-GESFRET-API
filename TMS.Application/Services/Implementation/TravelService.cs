@@ -19,16 +19,11 @@ public class TravelService : ITravelService
 
     public async Task<List<Travel>> GetAllAsync(TravelResultFilter filter)
     {
-        if (filter?.StartDate.HasValue == true && filter?.EndDate.HasValue == true && filter?.StartDate > filter?.EndDate)
-        {
-            throw new ArgumentException("The Start Date needs to be less than the End Date");
-        }
 
         var criteria = new TravelCriteria
         {
             IsCancelled = filter?.IsCancelled,
-            StartDate = filter?.StartDate,
-            EndDate = filter?.EndDate
+            EnterpriseId = filter.EnterpriseId
         };
 
         return await _travelRepository.GetAllAsync(criteria);

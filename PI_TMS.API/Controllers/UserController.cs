@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SQLitePCL;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
@@ -22,9 +23,9 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpGet("getAllUsers")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] UserResultFilter filter)
         {
-            var data = await _userService.ListAllUsers();
+            var data = await _userService.ListAllUsers(filter);
             return Ok(data);
 
         }
