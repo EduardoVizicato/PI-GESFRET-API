@@ -8,7 +8,7 @@ using TMS.Domain.Entites;
 
 namespace TMS.Domain.Entities
 {
-    internal class Cte : BaseEntity
+    public class Cte : BaseEntity
     {
         public Cte(string name, string description,IFormFile file)
         {
