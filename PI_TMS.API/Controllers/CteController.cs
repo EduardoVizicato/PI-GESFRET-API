@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entities;
-using TMS.Domain.Entities.Requests.;
 using TMS.Domain.Entities.Requests.Cte;
 
 namespace PI_TMS.API.Controllers

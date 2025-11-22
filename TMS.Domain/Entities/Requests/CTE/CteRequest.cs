@@ -9,12 +9,15 @@ namespace TMS.Domain.Entities.Requests.Cte
 {
     public class CteRequest
     {
-        public CteRequest(string name,string description, IFormFile file )
+
+        public CteRequest(Guid id, string name,string description, IFormFile file )
         {
+            Id = id;
             Name = name;
             Description = description;
             File = file;
         }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public IFormFile File { get; set; }
