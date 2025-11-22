@@ -10,27 +10,27 @@ namespace TMS.Domain.Entities
 {
     public class Cte : BaseEntity
     {
-        public Cte(string name, string description,IFormFile file)
+        public Cte(string name, string description,string file)
         {
             Name = name;
             Description = description;
             File = file;
             IsActive = true;
-            CreateAt = DateTime.Now;
+            CreatedAt = DateTime.Now;
         }
         public string Name { get; set; }
         public string Description { get; set; }
-        public IFormFile File { get; set; }
+        public string File { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
-        public void UpdateCte(string name, string description, IFormFile file)
+        public void UpdateCte(string name, string description, string file)
         {
             Name = name;
             Description = description;
             File = file;
-            UpdateAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
 
     }
