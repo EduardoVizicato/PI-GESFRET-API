@@ -25,6 +25,7 @@ namespace TMS.Service.Services
             services.AddScoped<ITravelService, TravelService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IMailService, GmailService>();
             return services;
         }
     }

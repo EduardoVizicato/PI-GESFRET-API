@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace TMS.Application.Models
 {
-    public class TravelResultFilter
-    {
-        public bool? IsCancelled { get; set; }
-        public Guid EnterpriseId { get; set; }
-    }
+    public record SendEmailRequest(string Recipient, string Subject, string Body);
+
 }

@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Identity;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.ValueObjects;
 
 namespace TMS.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<UserModel>> GetAllAsync();
+        Task<List<UserModel>> GetAllAsync(UserCriteria criteria);
         Task<UserModel> GetByIdAsync(Guid id);
         Task<UserModel> GetByEmailAsync(string email);
         Task<IdentityResult> AddAsync(UserModel user, string password);
