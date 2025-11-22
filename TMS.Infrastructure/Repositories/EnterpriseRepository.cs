@@ -12,7 +12,7 @@ using TMS.Infrastructure.Data;
 
 namespace TMS.Infrastructure.Repositories
 {
-    internal class EnterpriseRepository : IEnterpriseRepository
+    public class EnterpriseRepository : IEnterpriseRepository
     {
         private readonly ApplicationDataContext _context;
 

@@ -9,7 +9,7 @@ using TMS.Domain.Entities.Requests.Enterprise;
 
 namespace TMS.Domain.Repositories
 {
-    public class ICteRepository
+    public interface ICteRepository
     {
         Task<CteRequest> AddAsync(Cte cte);
     }

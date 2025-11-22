@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,16 +24,14 @@ namespace TMS.Application.Services.Implementation
         public async Task<Guid> AddCteAsync(CteRequest cteRequest)
         {
             var entity = new Cte(cteRequest.Name, cteRequest.Description, cteRequest.File)
-            {            };
+            { };
 
             var addCte = await _cteRepository.AddAsync(entity);
 
-            return addCte;
-
+            return addCte.Id; // Fix: Return the Guid Id property from the entity, not the entity itself
         }
 
         
             
         }
     }
-}
