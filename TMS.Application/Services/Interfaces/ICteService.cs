@@ -9,6 +9,6 @@ namespace TMS.Application.Services.Interfaces
 {
     public interface ICteService
     {
-        Task<Guid> AddCteAsync(CteRequest cteRequest);
+        Task AddCteAsync(CteRequest cteRequest);
     }
 }

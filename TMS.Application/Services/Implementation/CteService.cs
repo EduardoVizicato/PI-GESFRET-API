@@ -21,14 +21,13 @@ namespace TMS.Application.Services.Implementation
         {
             _cteRepository = cteRepository;
         }
-        public async Task<Guid> AddCteAsync(CteRequest cteRequest)
+        public async Task AddCteAsync(CteRequest cteRequest)
         {
             var entity = new Cte(cteRequest.Name, cteRequest.Description, cteRequest.File)
             { };
 
-            var addCte = await _cteRepository.AddAsync(entity);
+            await _cteRepository.AddAsync(entity);
 
-            return addCte.Id; // Fix: Return the Guid Id property from the entity, not the entity itself
         }
 
         

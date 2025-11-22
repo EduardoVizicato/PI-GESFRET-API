@@ -27,18 +27,18 @@ namespace TMS.Infrastructure.Data.Configuration.CteConfiguration
                  .HasColumnName("File")
                  .IsRequired();
 
-            //builder.Property(x => x.UpdatedAt)
-            //    .HasColumnName("UpdatedAt")
-            //    .HasColumnType("datetime2");
+            builder.Property(x => x.UpdatedAt)
+                .HasColumnName("UpdatedAt")
+                .HasColumnType("datetime2");
 
-            //builder.Property(x => x.IsActive)
-            //    .IsRequired()
-            //    .HasColumnName("IsActive")
-            //    .HasColumnType("bit");
+            builder.Property(x => x.IsActive)
+                .IsRequired()
+                .HasColumnName("IsActive")
+                .HasColumnType("bit");
 
-            //builder.Property(t => t.CreatedAt)
-            //    .HasColumnName("DateCreate")
-            //    .IsRequired();
+            builder.Property(t => t.CreatedAt)
+                .HasColumnName("DateCreate")
+                .IsRequired();
         }
     }
 }

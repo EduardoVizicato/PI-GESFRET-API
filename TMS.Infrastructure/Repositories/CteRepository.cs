@@ -23,7 +23,6 @@ namespace TMS.Infrastructure.Repositories
         public async Task<CteRequest> AddAsync(Cte cte)
         {
             var addCte = new CteRequest(
-                cte.Id,
                 cte.Name,
                 cte.Description,
                 cte.File
