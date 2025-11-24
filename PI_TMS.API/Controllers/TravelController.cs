@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PI_TMS.API.Models.ViewModel;
 using System.Windows.Markup;
 using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
@@ -29,15 +30,44 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpPost("addTravel")]
-        public async Task<IActionResult> AddTravel(TravelRequest travel)
+        public async Task<IActionResult> AddTravel([FromForm] TravelViewModel travelView)
         {
+            var filePath = Path.Combine("Storage", travelView.File.FileName);
+
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            travelView.File.CopyTo(fileStream);
+
+            var travel = new TravelRequest(
+                travelView.StartDate,
+                travelView.EndDate,
+                travelView.Origin,
+                travelView.Destination,
+                travelView.Load,
+                travelView.Price,
+                travelView.TruckId,
+                travelView.EnterpriseId,
+                filePath
+            );
+
             var data = await _travelService.AddAsync(travel);
             if (data == null)
                 return BadRequest();
             
             return Ok(data);
         }
-        
+        [HttpPost("download")]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var data = await _travelService.GetByIdAsync(id);
+            
+            if (data == null)
+                return BadRequest();
+
+            var dataBytes = System.IO.File.ReadAllBytes(data.FilePath);
+
+            return File(dataBytes, "application/pdf");
+        }
+
         [HttpGet("getTravelById")]
         public async Task<IActionResult> GetTravelById(Guid id)
         {

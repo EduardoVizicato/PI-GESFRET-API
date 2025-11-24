@@ -19,7 +19,8 @@ namespace TMS.Domain.Entites
             decimal price,
             LoadVO load,
             Guid truckId,
-            Guid enterpriseId)
+            Guid enterpriseId,
+            string filePath)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -31,6 +32,7 @@ namespace TMS.Domain.Entites
             IsCanceled = false;
             TruckId = truckId;
             EnterpriseId = enterpriseId;
+            FilePath = filePath;
 
         }
         public Guid Id { get; private set; } = Guid.NewGuid();
@@ -40,6 +42,9 @@ namespace TMS.Domain.Entites
         public AddressVO Destination { get; private set; }
         public LoadVO Load { get; private set; }
         public decimal Price { get; private set; }
+
+        public string? FilePath { get; set; } 
+
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsCanceled { get; private set; }

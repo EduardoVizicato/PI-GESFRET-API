@@ -8,6 +8,7 @@ namespace TMS.Domain.ValueObjects
 {
     public class AddressVO
     {
+        public AddressVO() { }
         public AddressVO(string zipCode, string street, string number, string neighborhood, string complement, string city, string state, string country, string hemisphere, string xCoordinate, string yCoordinate)
         {
             ZipCode = zipCode;
