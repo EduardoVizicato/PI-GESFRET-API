@@ -9,6 +9,7 @@ namespace TMS.Domain.ValueObjects
 {
     public class LoadVO
     {
+        public LoadVO() { }
         public LoadVO(string product, float weight, LoadType loadType)
         {
             Product = product;
