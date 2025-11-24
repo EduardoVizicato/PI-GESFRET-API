@@ -20,7 +20,7 @@ namespace TMS.Domain.Entites
             LoadVO load,
             Guid truckId,
             Guid enterpriseId,
-            string filePath)
+            string? filePath)
         {
             StartDate = startDate;
             EndDate = endDate;

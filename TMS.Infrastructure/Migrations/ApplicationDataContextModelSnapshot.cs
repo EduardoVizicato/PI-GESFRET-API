@@ -177,7 +177,6 @@ namespace TMS.Infrastructure.Migrations
                         .HasColumnName("EnterpriseId");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("FilePath");
 

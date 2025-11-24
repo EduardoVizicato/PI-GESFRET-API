@@ -53,7 +53,6 @@ namespace TMS.Infrastructure.Data.Configuration.TravelConfiguration
                 .HasColumnName("Price");
 
             builder.Property(t => t.FilePath)
-                .IsRequired()
                 .HasColumnName("FilePath");
 
             builder.Property(t => t.IsCanceled)

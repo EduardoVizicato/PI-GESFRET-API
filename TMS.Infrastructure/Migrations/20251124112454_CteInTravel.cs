@@ -18,8 +18,7 @@ namespace TMS.Infrastructure.Migrations
                 name: "FilePath",
                 table: "Travels",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
         }
 
         /// <inheritdoc />

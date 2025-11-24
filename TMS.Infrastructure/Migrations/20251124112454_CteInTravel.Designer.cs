@@ -12,7 +12,7 @@ using TMS.Infrastructure.Data;
 namespace TMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    [Migration("20251124011359_CteInTravel")]
+    [Migration("20251124112454_CteInTravel")]
     partial class CteInTravel
     {
         /// <inheritdoc />
@@ -180,7 +180,6 @@ namespace TMS.Infrastructure.Migrations
                         .HasColumnName("EnterpriseId");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("FilePath");
 
