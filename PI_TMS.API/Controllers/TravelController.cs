@@ -55,7 +55,19 @@ namespace PI_TMS.API.Controllers
             
             return Ok(data);
         }
-        
+        [HttpPost("download")]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var data = await _travelService.GetByIdAsync(id);
+            
+            if (data == null)
+                return BadRequest();
+
+            var dataBytes = System.IO.File.ReadAllBytes(data.FilePath);
+
+            return File(dataBytes, "application/pdf");
+        }
+
         [HttpGet("getTravelById")]
         public async Task<IActionResult> GetTravelById(Guid id)
         {
