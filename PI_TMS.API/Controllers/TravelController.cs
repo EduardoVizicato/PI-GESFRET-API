@@ -32,7 +32,8 @@ namespace PI_TMS.API.Controllers
         [HttpPost("addTravel")]
         public async Task<IActionResult> AddTravel([FromForm] TravelViewModel travelView)
         {
-            var filePath = Path.Combine("Storage", travelView.File.FileName);
+            var randomName = Guid.NewGuid().ToString();
+            var filePath = Path.Combine("Storage", randomName);
 
             using Stream fileStream = new FileStream(filePath, FileMode.Create);
             travelView.File.CopyTo(fileStream);
