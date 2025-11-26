@@ -58,9 +58,9 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpGet("getAllActivedVehicles")]
-        public async Task<IActionResult> GetAllActived()
+        public async Task<IActionResult> GetAllActived([FromQuery] VehicleResultFilter filter)
         {
-            var data = await _service.ListAllActivedVehicles();
+            var data = await _service.ListAllActivedVehicles(filter);
             return Ok(data);
 
         }

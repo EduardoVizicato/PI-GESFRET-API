@@ -48,12 +48,11 @@ namespace TMS.Domain.Entites
         public DateTime CreatedAt { get; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsCanceled { get; private set; }
-
         public Guid TruckId {  get; private set; }
         public Vehicle Truck { get; set; }
-
         public Guid EnterpriseId { get; set; }
         public Enterprise Enterprise { get; set; }
+        public string CteUrl { get; set; }
 
         public void UpdateTravel(
             DateTime startDate, 
