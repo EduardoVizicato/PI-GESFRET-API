@@ -57,14 +57,18 @@ namespace TMS.Application.Services.Implementation
             return updateVehicle;
         }
 
-        public async Task<List<Vehicle>> ListAllActivedVehicles()
+        public async Task<List<Vehicle>> ListAllActivedVehicles(VehicleResultFilter filter)
         {
-           return await _vehcileRepository.GetAllDesactivedVehicles();
+            var criteria = new VehicleCriteria
+            {
+                EnterpriseId = filter.EnterpriseId
+            };
+            return await _vehcileRepository.GetAllActivedVehicles(criteria);
         }
 
         public async Task<List<Vehicle>> ListAllDesactivedVehicles()
         {
-            return await _vehcileRepository.GetAllDesactivedVehicles();
+            return await _vehcileRepository.GetAllDesactivedVehciles();
         }
     }
 }

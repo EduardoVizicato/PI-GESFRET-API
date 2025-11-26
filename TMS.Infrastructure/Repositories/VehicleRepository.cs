@@ -109,13 +109,25 @@ public class VehicleRepository : IVehicleRepository
         return true;
     }
 
-    public async Task<List<Vehicle>> GetAllDesactivedVehicles()
+    public async Task<List<Vehicle>> GetAllActivedVehicles(VehicleCriteria criteria)
     {
-        return await _context.Vehicles.Where(x => x.IsActive == true).ToListAsync();
+        
+        IQueryable<Vehicle> query = _context.Vehicles.AsQueryable();
+
+        if (criteria != null)
+        {
+            if (criteria.EnterpriseId != Guid.Empty)
+            {
+                query = query.Where(t => t.EnterpriseId == criteria.EnterpriseId);
+            }
+        }
+        query = query.Where(x => x.IsActive == true);
+
+        return await query.ToListAsync();
     }
 
     public async Task<List<Vehicle>> GetAllDesactivedVehciles()
     {
-        return await _context.Vehicles.Where(x => x.IsActive == true).ToListAsync();
+        return await _context.Vehicles.Where(x => x.IsActive == false).ToListAsync();
     }
 }

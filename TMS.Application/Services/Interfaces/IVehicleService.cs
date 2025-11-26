@@ -18,7 +18,7 @@ namespace TMS.Application.Services.Interfaces
         Task<VehicleRequest> RegisterVehicleAsync(VehicleRequest vehicle);
         Task<bool?> UpdateVehicleAsync(Guid id, VehicleResponse vehicle);
         Task<bool?> DesactiveVehicleAsync(Guid id);
-        Task<List<Vehicle>> ListAllActivedVehicles();
+        Task<List<Vehicle>> ListAllActivedVehicles(VehicleResultFilter filter);
         Task<List<Vehicle>> ListAllDesactivedVehicles();
     }
 }
