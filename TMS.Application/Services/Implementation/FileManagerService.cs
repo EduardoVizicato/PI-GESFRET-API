@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 using TMS.Application.Services.Interfaces;
 namespace TMS.Application.Services.Implementation
 {
-    public class FileManagerService : IFileManagerService
+    public class FileManagerService
     {
-        private readonly IFileSystemManager _fileSystemManager;
+        //private readonly IFileSystemManager _fileSystemManager;
 
-        public FileManagerService(IFileSystemManager fileSystemManager)
-        {
-            _fileSystemManager = fileSystemManager;
-        }
+        //public FileManagerService(IFileSystemManager fileSystemManager)
+        //{
+        //    _fileSystemManager = fileSystemManager;
+        //}
 
-        public byte[] GetContent(string filePath)
-        {
-            throw new NotImplementedException();
-        }
+        //public byte[] GetContent(string filePath)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool SaveFile(byte[] fileContent, string fileName)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool SaveFile(byte[] fileContent, string fileName)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

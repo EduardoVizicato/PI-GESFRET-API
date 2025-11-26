@@ -1,15 +1,18 @@
-using System.Text;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PI_TMS.API.Models.DTOs;
+using System.Text;
+using System.Text.Json.Serialization;
+using TMS.Application.Models;
+using TMS.Application.Services.Implementation;
+using TMS.Application.Services.Interfaces;
 using TMS.Infrastructure;
 using TMS.Infrastructure.Data;
 using TMS.Infrastructure.OptionsSetup;
 using TMS.Service.Services;
-using System.Text.Json.Serialization;
-using TMS.Application.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -25,6 +28,9 @@ var builder = WebApplication.CreateBuilder(args);
       });
     builder.Services.AddInfrastructure();
     builder.Services.AddApplication();
+    builder.Services.AddMemoryCache();
+    builder.Services.AddSingleton<AuthCodeStore>();
+    builder.Services.AddScoped<IMailService, GmailService>();
 
     builder.Services.AddOpenApi();
 
