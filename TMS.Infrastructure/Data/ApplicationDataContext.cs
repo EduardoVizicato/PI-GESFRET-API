@@ -26,7 +26,7 @@ namespace TMS.Infrastructure.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Travel> Travels { get; set; }
         public DbSet<Enterprise> Enterprises { get; set; }
-        public DbSet<Cte> Ctes { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

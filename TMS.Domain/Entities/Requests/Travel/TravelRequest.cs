@@ -10,7 +10,16 @@ namespace TMS.Domain.Entites.Requests.Travel
 {
     public class TravelRequest
     {
-        public TravelRequest(DateTime startDate, DateTime endDate, AddressVO origin, AddressVO destination, LoadVO load, decimal price, Guid truckId, Guid enterpriseId)
+        public TravelRequest(
+            DateTime startDate, 
+            DateTime endDate, 
+            AddressVO origin, 
+            AddressVO destination, 
+            LoadVO load, 
+            decimal price, 
+            Guid truckId, 
+            Guid enterpriseId, 
+            string? filePath)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -20,6 +29,7 @@ namespace TMS.Domain.Entites.Requests.Travel
             Price = price;
             TruckId = truckId;
             EnterpriseId = enterpriseId;
+            FilePath = filePath;
         }
 
         public DateTime StartDate { get; private set; }
@@ -30,5 +40,6 @@ namespace TMS.Domain.Entites.Requests.Travel
         public decimal Price { get; private set; }
         public Guid TruckId { get; private set; }
         public Guid EnterpriseId { get; set; }
+        public string? FilePath { get; private set; }
     }
 }

@@ -49,7 +49,8 @@ public class TravelRepository : ITravelRepository
             travel.Price,
             travel.Load,
             travel.TruckId,
-            travel.EnterpriseId
+            travel.EnterpriseId,
+            travel.FilePath
             );
         _context.Travels.Add(addTravel);
         await _context.SaveChangesAsync();
