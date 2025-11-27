@@ -1,20 +1,19 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Extensions;
-using Microsoft.AspNetCore.Identity;
+using TMS.Application.Models;
 using TMS.Application.Services.Interfaces;
 using TMS.Domain.Entites.Requests.User;
 using TMS.Domain.Entites.Responses.User;
 using TMS.Domain.Entities;
+using TMS.Domain.Entities.Common.Criteria;
 using TMS.Domain.Repositories;
 using TMS.Domain.ValueObjects;
-using Microsoft.CodeAnalysis;
-using TMS.Application.Models;
-using TMS.Domain.Entities.Common.Criteria;
 
 namespace TMS.Application.Services.Implementation
 {
@@ -180,6 +179,27 @@ namespace TMS.Application.Services.Implementation
         {
             var deleteUser = await _userRepository.DeleteUser(id);
             return true;
+        }
+
+        public async Task<(bool Success, string Message)> ChangePasswordAsync(string email, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+                return (false, "Usuário não encontrado.");
+
+            if (newPassword != confirmNewPassword)
+                return (false, "A nova senha e a confirmação não são iguais.");
+
+            var result = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                return (false, $"Erro ao trocar a senha: {errors}");
+            }
+
+            return (true, "Senha alterada com sucesso.");
         }
     }
 }

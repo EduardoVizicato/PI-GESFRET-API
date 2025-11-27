@@ -23,6 +23,7 @@ namespace TMS.Application.Services.Interfaces
         Task<List<UserModel>> ListAllActivedUsers();
         Task<List<UserModel>> ListAllDesactivedUsers();
         Task<UserModel> ValidateUser(string email, string password);
-        Task<bool> DeleteUser (Guid id);
+        Task<bool> DeleteUser(Guid id);
+        Task<(bool Success, string Message)> ChangePasswordAsync(string email, string oldPassword, string newPassword, string confirmNewPassword);
     }
 }

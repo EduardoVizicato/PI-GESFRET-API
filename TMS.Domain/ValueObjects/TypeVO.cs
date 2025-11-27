@@ -1,7 +1,5 @@
 ﻿using System.Data;
 using System.Text.RegularExpressions;
-using Abp.Domain.Values;
-using Abp.Extensions;
 
 namespace TMS.Domain.ValueObjects;
 

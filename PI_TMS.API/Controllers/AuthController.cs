@@ -17,12 +17,14 @@ namespace PI_TMS.API.Controllers
         private readonly ILoginService _loginService;
         private readonly UserManager<UserModel> _userManager;
         private readonly IMailService _mailService;
-        public AuthController(ILoginService loginService, UserManager<UserModel> userManager, AuthCodeStore codeStore, IMailService mailService)
+        private readonly IUserService _userService;
+        public AuthController(ILoginService loginService, UserManager<UserModel> userManager, AuthCodeStore codeStore, IMailService mailService, IUserService userService)
         {
             _loginService = loginService;
             _userManager = userManager;
             _mailService = mailService;
             _authCodeStore = codeStore;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -73,6 +75,17 @@ namespace PI_TMS.API.Controllers
                 return Unauthorized("Invalid code.");
 
             return Ok("Authentication successful!");
+        }
+
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword(PasswordChangeDTO dto)
+        {
+            var data = _userService.ChangePasswordAsync(dto.Email, dto.OldPassword, dto.NewPassword, dto.ConfirmPassword);
+
+            if (data == null)
+                return BadRequest();
+
+            return Ok(data);
         }
     }
 }
