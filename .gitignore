@@ -486,3 +486,5 @@ $RECYCLE.BIN/
 PI_TMS.API/appsettings.Development.json
 
 TMS.Infrastructure/Data/ApplicationDataContextFactory.cs
+
+PI_TMS.API/Storage/

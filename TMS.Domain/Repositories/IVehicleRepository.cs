@@ -13,6 +13,6 @@ public interface IVehicleRepository
     Task<VehicleRequest> AddVehicleAsync(VehicleRequest vehicle);
     Task<bool> UpdateVehicleAsync(Guid id,VehicleResponse vehicle);
     Task<bool?> DesactiveVehicleAsync(Guid id);
-    Task<List<Vehicle>> GetAllDesactivedVehicles();
+    Task<List<Vehicle>> GetAllActivedVehicles(VehicleCriteria criteria);
     Task<List<Vehicle>> GetAllDesactivedVehciles();
 }

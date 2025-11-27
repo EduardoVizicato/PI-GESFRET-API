@@ -52,7 +52,7 @@ namespace TMS.Domain.Entites
         public Vehicle Truck { get; set; }
         public Guid EnterpriseId { get; set; }
         public Enterprise Enterprise { get; set; }
-        public string CteUrl { get; set; }
+        public string? CteUrl { get; set; }
 
         public void UpdateTravel(
             DateTime startDate, 
