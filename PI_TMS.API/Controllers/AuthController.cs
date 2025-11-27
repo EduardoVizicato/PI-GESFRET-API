@@ -78,14 +78,11 @@ namespace PI_TMS.API.Controllers
         }
 
         [HttpPost("ChangePassword")]
-        public IActionResult ChangePassword(PasswordChangeDTO dto)
+        public async Task<IActionResult> ChangePassword(PasswordChangeDTO dto)
         {
-            var data = _userService.ChangePasswordAsync(dto.Email, dto.OldPassword, dto.NewPassword, dto.ConfirmPassword);
+            var (success, message) = await _userService.ChangePasswordAsync(dto.Email, dto.OldPassword, dto.NewPassword, dto.ConfirmPassword);
 
-            if (data == null)
-                return BadRequest();
-
-            return Ok(data);
+            return Ok(new { success, message });
         }
     }
 }
